@@ -1,0 +1,22 @@
+lib/
+  config/
+  core/
+    const/
+    utils/
+  gen/
+  widgets/
+   
+    features/
+    {{name.snakeCase()}}/
+      data/
+        mappers/
+        models/
+        repositories/
+      domain/
+        models/
+        repositories/
+        usecases/
+      presentation/
+        screens/
+        widgets/
+        bloc/
