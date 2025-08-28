@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTextTheme {
-  // Heading Styles
+  
   static TextStyle h1({
     Color? color,
     FontWeight weight = FontWeight.w700,
