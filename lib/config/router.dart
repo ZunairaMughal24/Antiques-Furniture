@@ -9,7 +9,7 @@ import 'package:antiques_furniture/features/login/presentation/screens/login_scr
 import 'package:antiques_furniture/features/sign_up/presentation/screens/sign_up_screen.dart';
 
 import 'package:antiques_furniture/home.dart';
-import 'package:antiques_furniture/main.dart';
+import 'package:antiques_furniture/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,7 +52,6 @@ abstract class AppRoutes {
   static const String privacy = '/privacy';
 }
 
-
 final router = GoRouter(
   initialLocation: AppRoutes.splashScreenRoute,
   routes: [
@@ -66,19 +65,19 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.loginScreenRoute,
-      pageBuilder: (context, state) =>
-          buildSlideTransition(
-            context: context,
-            state: state,
-            child: const SignInScreen()),
+      pageBuilder: (context, state) => buildSlideTransition(
+        context: context,
+        state: state,
+        child: const SignInScreen(),
+      ),
     ),
-      GoRoute(
+    GoRoute(
       path: AppRoutes.signUpScreenRoute,
-      pageBuilder: (context, state) =>
-          buildSlideTransition(
-            context: context,
-            state: state,
-            child: const SignUpScreen()),
+      pageBuilder: (context, state) => buildSlideTransition(
+        context: context,
+        state: state,
+        child: const SignUpScreen(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.homeScreenRoute,
@@ -89,16 +88,6 @@ final router = GoRouter(
       ),
     ),
 
-    // GoRoute(
-    //   path: AppRoutes.profile,
-    //   pageBuilder: (context, state) =>
-    //       buildSlideTransition(context: context, state: state, child: const ProfileScreen()),
-    // ),
-    // GoRoute(
-    //   path: AppRoutes.detail,
-    //   pageBuilder: (context, state) =>
-    //       buildSlideTransition(context: context, state: state, child: const DetailScreen()),
-    // ),
     GoRoute(
       path: AppRoutes.popularItemsDetailScreenRoute,
       builder: (context, state) {
@@ -120,12 +109,12 @@ final router = GoRouter(
         return CategoryScreen();
       },
     ),
-      GoRoute(
-      path: AppRoutes.cartScreenRoute,
-      builder: (context, state) {
-        final product = state.extra as HomeItemModel;
-        return CartScreen();
-      },
-    ),
+    //   GoRoute(
+    //   path: AppRoutes.cartScreenRoute,
+    //   builder: (context, state) {
+    //     final product = state.extra as HomeItemModel;
+    //     return CartScreen();
+    //   },
+    // ),
   ],
 );

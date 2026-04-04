@@ -1,232 +1,232 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTextTheme {
-  
+  //Simple Texts (Global Default: Nunito)
+  static TextStyle _nunito({
+    Color? color,
+    double fontSize = 16,
+    FontWeight weight = FontWeight.w400,
+    double? lineHeight,
+  }) => GoogleFonts.nunito(
+    fontSize: fontSize,
+    color: color,
+    fontWeight: weight,
+    height: lineHeight ?? 1.5,
+  );
+
+  //Logo Fonts (Cinzel)
+  static TextStyle logoStyle({
+    Color? color,
+    double fontSize = 24,
+    FontWeight weight = FontWeight.w600,
+    double? lineHeight,
+    double? letterSpacing,
+  }) => GoogleFonts.cinzel(
+    fontSize: fontSize,
+    color: color,
+    fontWeight: weight,
+    height: lineHeight ?? 1.3,
+    letterSpacing: letterSpacing,
+  );
+
+  //Mono/Specialized Texts (Geologica)
+  static TextStyle monoStyle({
+    Color? color,
+    double fontSize = 14,
+    FontWeight weight = FontWeight.w400,
+    double? lineHeight,
+  }) => GoogleFonts.geologica(
+    fontSize: fontSize,
+    color: color,
+    fontWeight: weight,
+    height: lineHeight ?? 1.5,
+  );
+
   static TextStyle h1({
     Color? color,
     FontWeight weight = FontWeight.w700,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 32,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 
   static TextStyle h2({
     Color? color,
     FontWeight weight = FontWeight.w700,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 28,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 
   static TextStyle h3({
     Color? color,
     FontWeight weight = FontWeight.w600,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 24,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 
   static TextStyle h4({
     Color? color,
     FontWeight weight = FontWeight.w600,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 20,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 
-  // Body Text Styles
   static TextStyle bodyLarge({
     Color? color,
     FontWeight weight = FontWeight.w400,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 18,
-    height: lineHeight ?? 1.5,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight,
   );
 
   static TextStyle bodyMedium({
     Color? color,
     FontWeight weight = FontWeight.w400,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 16,
-    height: lineHeight ?? 1.5,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight,
   );
 
   static TextStyle bodySmall({
     Color? color,
     FontWeight weight = FontWeight.w400,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 14,
-    height: lineHeight ?? 1.5,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight,
   );
 
-  // Label Styles
   static TextStyle labelLarge({
     Color? color,
     FontWeight weight = FontWeight.w500,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 16,
-    height: lineHeight ?? 1.2,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.2,
   );
 
   static TextStyle labelMedium({
     Color? color,
     FontWeight weight = FontWeight.w500,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 14,
-    height: lineHeight ?? 1.2,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.2,
   );
 
   static TextStyle labelSmall({
     Color? color,
     FontWeight weight = FontWeight.w500,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 12,
-    height: lineHeight ?? 1.2,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.2,
   );
 
-  // Button Text Styles
   static TextStyle buttonLarge({
     Color? color,
     FontWeight weight = FontWeight.w600,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 18,
-    height: lineHeight ?? 1.2,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.2,
   );
 
   static TextStyle buttonMedium({
     Color? color,
     FontWeight weight = FontWeight.w600,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 16,
-    height: lineHeight ?? 1.2,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.2,
   );
 
   static TextStyle buttonSmall({
     Color? color,
     FontWeight weight = FontWeight.w600,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 14,
-    height: lineHeight ?? 1.2,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.2,
   );
 
-  // Caption Styles
   static TextStyle caption({
     Color? color,
     FontWeight weight = FontWeight.w400,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 12,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 
-  // Link Styles
   static TextStyle link({
     Color? color,
     FontWeight weight = FontWeight.w500,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 16,
-    height: lineHeight ?? 1.5,
-    fontWeight: weight,
-    decoration: TextDecoration.underline,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
-  );
+    lineHeight: lineHeight,
+  ).copyWith(decoration: TextDecoration.underline);
 
-  // Custom Styles for specific use cases
   static TextStyle title({
     Color? color,
     FontWeight weight = FontWeight.w700,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 22,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 
   static TextStyle subtitle({
     Color? color,
     FontWeight weight = FontWeight.w500,
-    String? fontFamily,
     double? lineHeight,
-  }) => TextStyle(
+  }) => _nunito(
     fontSize: 18,
-    height: lineHeight ?? 1.3,
-    fontWeight: weight,
+    weight: weight,
     color: color,
-    fontFamily: fontFamily,
+    lineHeight: lineHeight ?? 1.3,
   );
 }

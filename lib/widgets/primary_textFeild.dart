@@ -79,7 +79,7 @@ class PrimaryTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          style: AppTextTheme.bodyMedium(color: textColor ?? AppColors.white),
+          style: AppTextTheme.bodyMedium(color: textColor ?? AppColors.pureBlack),
           autofocus: autoFocus,
           readOnly: !enabled || onTap != null,
           onTap: onTap,

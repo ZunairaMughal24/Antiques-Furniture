@@ -1,6 +1,7 @@
 import 'package:antiques_furniture/features/cart/presentation/screens/cart_screen.dart';
 import 'package:antiques_furniture/features/categories/presentation/screens/categories_screen.dart';
 import 'package:antiques_furniture/features/home/presentation/screens/home_screen.dart';
+import 'package:antiques_furniture/features/profile/presentation/screens/profile_screen.dart';
 import 'package:antiques_furniture/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const HomeScreen(),
     CategoryScreen(),
-    CartScreen(),
-
-    const Center(child: Text("Profile Page", style: TextStyle(fontSize: 24))),
+    const CartScreen(),
+    const ProfileScreen(),
   ];
 
   @override

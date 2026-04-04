@@ -1,5 +1,6 @@
 import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
+import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -74,10 +75,9 @@ class HomeGridNoScroll extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8, top: 8),
                   child: Text(
                     item.name,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: AppTextTheme.bodyMedium(
+                      weight: FontWeight.w500,
+                    ).copyWith(fontSize: 15),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -86,10 +86,9 @@ class HomeGridNoScroll extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8, top: 2),
                   child: Text(
                     item.category,
-                    style: const TextStyle(
-                      fontSize: 13,
+                    style: AppTextTheme.bodySmall(
                       color: AppColors.lightGrey,
-                    ),
+                    ).copyWith(fontSize: 13),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -100,9 +99,10 @@ class HomeGridNoScroll extends StatelessWidget {
                     children: [
                       Text(
                         '\$${item.price}',
-                        style: const TextStyle(
+                        style: AppTextTheme.monoStyle(
                           fontSize: 16,
                           color: AppColors.primaryColor,
+                          weight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 8),

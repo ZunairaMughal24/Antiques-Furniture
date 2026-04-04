@@ -54,19 +54,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   50.heightBox,
                   Text(
                     "ANTIQUES",
-                    style: AppTextTheme.h3(
+                    style: AppTextTheme.logoStyle(
                       color: Colors.brown,
+                      fontSize: 24,
                       weight: FontWeight.bold,
-                      fontFamily: "regular",
                     ),
                   ),
                   Text(
                     "Furniture",
-                    style: AppTextTheme.bodyMedium(
+                    style: AppTextTheme.logoStyle(
                       color: AppColors.primaryColor,
                       weight: FontWeight.bold,
-                      fontFamily: "regular",
-                    ).copyWith(fontSize: 18),
+                      fontSize: 18,
+                    ),
                   ),
 
                   Center(
@@ -78,7 +78,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           "Login",
                           style: AppTextTheme.h4(
                             weight: FontWeight.bold,
-                            fontFamily: "regular",
                           ),
                         ).pOnly(left: 6),
                         8.heightBox,

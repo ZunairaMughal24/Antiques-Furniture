@@ -1,5 +1,6 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static Color get primaryLight => const Color.fromARGB(255, 216, 193, 149);
@@ -10,6 +11,7 @@ class AppTheme {
       primaryColor: primaryLight,
       dividerColor: Colors.grey,
       scaffoldBackgroundColor: const Color.fromARGB(255, 236, 234, 234),
+      fontFamily: GoogleFonts.nunito().fontFamily,
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryLight,
         brightness: Brightness.light,
@@ -26,24 +28,13 @@ class AppTheme {
           color: AppColors.blackColor,
           fontSize: 19,
           fontWeight: FontWeight.w600,
-
-          fontFamily: "regular",
         ),
         centerTitle: true,
       ),
       textTheme: const TextTheme(
-        bodyLarge: TextStyle(
-          color: AppColors.blackColor,
-          fontFamily: "regular",
-        ),
-        bodyMedium: TextStyle(
-          color: AppColors.blackColor,
-          fontFamily: "regular",
-        ),
-        bodySmall: TextStyle(
-          color: AppColors.blackColor,
-          fontFamily: "regular",
-        ),
+        bodyLarge: TextStyle(color: AppColors.blackColor),
+        bodyMedium: TextStyle(color: AppColors.blackColor),
+        bodySmall: TextStyle(color: AppColors.blackColor),
       ),
     );
   }
