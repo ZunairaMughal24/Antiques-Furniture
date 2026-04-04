@@ -47,10 +47,8 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                 children: [
                   NeumorphicBox(
                     borderRadius: 30,
-                    depth: isSelected ? 4 : 8,
-                    color: isSelected
-                        ? AppColors.primaryColor.withOpacity(0.1)
-                        : null,
+                    depth: isSelected ? 2 : 8,
+                    color: null,
                     padding: EdgeInsets.zero,
                     child: Container(
                       width: 60,
