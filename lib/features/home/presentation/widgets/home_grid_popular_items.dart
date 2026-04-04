@@ -18,7 +18,7 @@ class HomeGridNoScroll extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.72,
+        childAspectRatio: 0.70,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
       ),
@@ -98,7 +98,7 @@ class HomeGridNoScroll extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 5),
+                  padding: const EdgeInsets.only(left: 8, top: 4, right: 8),
                   child: Row(
                     children: [
                       Expanded(

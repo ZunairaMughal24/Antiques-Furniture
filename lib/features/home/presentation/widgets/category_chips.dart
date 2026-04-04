@@ -56,6 +56,10 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                       padding: const EdgeInsets.all(16),
                       child: SvgPicture.asset(
                         category["icon"]!,
+                        width: 28,
+                        height: 28,
+                        fit: BoxFit.contain,
+                        alignment: Alignment.center,
                         colorFilter: ColorFilter.mode(
                           isSelected ? AppColors.primaryColor : Colors.black87,
                           BlendMode.srcIn,
