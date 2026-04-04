@@ -10,7 +10,7 @@ class AppTheme {
       canvasColor: Colors.white,
       primaryColor: primaryLight,
       dividerColor: Colors.grey,
-      scaffoldBackgroundColor: const Color.fromARGB(255, 236, 234, 234),
+      scaffoldBackgroundColor: AppColors.neumorphicBase,
       fontFamily: GoogleFonts.nunito().fontFamily,
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryLight,

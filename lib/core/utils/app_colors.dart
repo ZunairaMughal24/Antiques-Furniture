@@ -18,6 +18,10 @@ class AppColors {
   static const Color yellow = Color.fromRGBO(237, 213, 0, 1);
 
   static const Color lightGrey = Color(0xFF8f8f8f);
-
   static const Color errorRed = Color(0xFFb01819);
+
+  // Neumorphic Design Tokens (Peach Theme)
+  static const Color neumorphicBase = Color(0xFFFDECDA);
+  static const Color neumorphicLight = Color(0xFFFFF9F2);
+  static const Color neumorphicDark = Color(0xFFC79A7A); // Darker Peach-Brown
 }

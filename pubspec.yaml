@@ -46,6 +46,7 @@ dependencies:
   equatable: ^2.0.7
   dio: ^5.9.0
   http: ^1.5.0
+  flutter_svg: ^2.0.10
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +75,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/animations/
+    - assets/icons/svgs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

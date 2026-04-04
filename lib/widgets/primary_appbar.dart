@@ -1,6 +1,5 @@
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
-import 'package:antiques_furniture/core/utils/padding_extention.dart';
-import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
+import 'package:antiques_furniture/widgets/neumorphic_box.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -25,7 +24,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   }) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(70); // Slightly taller for depth
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,6 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
         children: [
           if (showBackButton)
             _buildActionIcon(
@@ -43,7 +41,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
               onTap: onBackTap ?? () => Navigator.of(context).pop(),
             )
           else
-            const SizedBox(width: 30),
+            const SizedBox(width: 45),
 
           Text(
             title,
@@ -56,7 +54,6 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               if (showSearchButton)
                 _buildActionIcon(icon: Icons.search, onTap: onSearchTap),
-              if (showSearchButton && showNotificationButton) 8.widthBox,
               if (showNotificationButton)
                 _buildActionIcon(
                   icon: Icons.notifications_outlined,
@@ -65,21 +62,21 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
         ],
-      ).px4(),
+      ),
     );
   }
 
   Widget _buildActionIcon({required IconData icon, VoidCallback? onTap}) {
-    return Container(
-      height: 45,
-      width: 45,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: IconButton(
-        icon: Icon(icon, color: Colors.black),
-        onPressed: onTap ?? () {},
+    return NeumorphicBox(
+      borderRadius: 12,
+      depth: 6,
+      child: SizedBox(
+        height: 45,
+        width: 45,
+        child: IconButton(
+          icon: Icon(icon, color: Colors.black, size: 20),
+          onPressed: onTap ?? () {},
+        ),
       ),
     );
   }

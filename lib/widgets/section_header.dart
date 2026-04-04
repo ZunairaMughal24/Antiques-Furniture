@@ -1,5 +1,5 @@
+import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
-import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -21,9 +21,10 @@ class SectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppTextTheme.bodyMedium().copyWith(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
+          style: AppTextTheme.logoStyle().copyWith(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
           ),
         ),
         if (actionText != null)
@@ -31,7 +32,10 @@ class SectionHeader extends StatelessWidget {
             onTap: onActionTap,
             child: Text(
               actionText!,
-              style: AppTextTheme.bodyMedium().copyWith(fontSize: 13),
+              style: AppTextTheme.bodySmall(
+                color: AppColors.primaryColor,
+                weight: FontWeight.bold,
+              ).copyWith(fontSize: 13),
             ),
           ),
       ],

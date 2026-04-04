@@ -2,6 +2,7 @@ import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
+import 'package:antiques_furniture/widgets/neumorphic_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
@@ -17,9 +18,9 @@ class HomeGridNoScroll extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.7,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 8,
+        childAspectRatio: 0.72,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
       ),
       itemCount: 6,
       itemBuilder: (context, index) {
@@ -29,12 +30,9 @@ class HomeGridNoScroll extends StatelessWidget {
             AppRoutes.popularItemsDetailScreenRoute,
             extra: item,
           ),
-          child: Card(
-            color: AppColors.white,
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
+          child: NeumorphicBox(
+            borderRadius: 15,
+            depth: 4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -55,17 +53,23 @@ class HomeGridNoScroll extends StatelessWidget {
                     Positioned(
                       right: 8,
                       bottom: 8,
-                      child: Card(
-                        color: AppColors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Icon(
-                            Icons.shopping_bag_outlined,
-                            color: Color.fromARGB(255, 236, 203, 173),
-                          ),
+                        child: const Icon(
+                          Icons.shopping_bag_outlined,
+                          color: AppColors.primaryColor,
+                          size: 18,
                         ),
                       ),
                     ),
@@ -97,15 +101,16 @@ class HomeGridNoScroll extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8, top: 5),
                   child: Row(
                     children: [
-                      Text(
-                        '\$${item.price}',
-                        style: AppTextTheme.monoStyle(
-                          fontSize: 15,
-                          color: AppColors.primaryColor,
-                          weight: FontWeight.w500,
+                      Expanded(
+                        child: Text(
+                          '\$${item.price}',
+                          style: AppTextTheme.monoStyle(
+                            fontSize: 15,
+                            color: AppColors.primaryColor,
+                            weight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                      const SizedBox(width: 8),
                       RatingBarIndicator(
                         rating: item.rating,
                         itemBuilder: (context, _) => const Icon(
@@ -113,9 +118,10 @@ class HomeGridNoScroll extends StatelessWidget {
                           color: Color.fromARGB(255, 252, 194, 23),
                         ),
                         itemCount: 5,
-                        itemSize: 16.0,
+                        itemSize: 12.0,
                         direction: Axis.horizontal,
                       ),
+                      const SizedBox(width: 4),
                     ],
                   ),
                 ),

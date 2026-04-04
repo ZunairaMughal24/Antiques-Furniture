@@ -39,6 +39,7 @@
 //   }
 // }
 import 'package:antiques_furniture/config/router.dart';
+import 'package:antiques_furniture/widgets/neumorphic_box.dart';
 import 'package:flutter/material.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
@@ -46,8 +47,8 @@ import 'package:antiques_furniture/features/home/domain/models/new_collection_mo
 import 'package:antiques_furniture/features/home/presentation/screens/popular_items_detail_screen.dart';
 import 'package:go_router/go_router.dart';
 
-class FurnitureImageRow extends StatelessWidget {
-  const FurnitureImageRow({super.key});
+class NewCollectionRow extends StatelessWidget {
+  const NewCollectionRow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +68,11 @@ class FurnitureImageRow extends StatelessWidget {
                   );
                 },
               ),
-              12.widthBox,
+              20.widthBox,
             ],
           );
         }).toList(),
-      ).pOnly(left: 12, top: 4, bottom: 4),
+      ).pOnly(left: 16, top: 4, bottom: 4),
     );
   }
 }
@@ -86,13 +87,16 @@ class _FurnitureImageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: 170,
-        width: 240,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+      child: NeumorphicBox(
+        borderRadius: 15,
+        depth: 4,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: Image.asset(product.image, fit: BoxFit.cover),
+          child: SizedBox(
+            height: 170,
+            width: 240,
+            child: Image.asset(product.image, fit: BoxFit.cover),
+          ),
         ),
       ),
     );

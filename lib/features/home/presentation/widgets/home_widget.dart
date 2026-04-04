@@ -4,6 +4,7 @@ import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
 import 'package:antiques_furniture/features/home/domain/models/banner_model.dart';
+import 'package:antiques_furniture/widgets/neumorphic_box.dart';
 
 class PromotionalBannerSlider extends StatefulWidget {
   final List<BannerModel> banners;
@@ -26,21 +27,20 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
     final double textWidth = bannerWidth * 0.55;
 
     return SizedBox(
-      height: bannerHeight,
+      height: bannerHeight + 32,
       width: bannerWidth,
       child: Stack(
         children: [
           PageView.builder(
             controller: _pageController,
+            clipBehavior: Clip.none,
             itemCount: widget.banners.length,
             onPageChanged: (index) => setState(() => currentIndex = index),
             itemBuilder: (context, index) {
               final banner = widget.banners[index];
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
+              return NeumorphicBox(
+                borderRadius: 15,
+                depth: 10,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Stack(
@@ -50,6 +50,9 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
+
+                        color: AppColors.neumorphicBase,
+                        colorBlendMode: BlendMode.multiply,
                       ),
 
                       Positioned(

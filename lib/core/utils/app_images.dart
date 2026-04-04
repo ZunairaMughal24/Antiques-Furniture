@@ -34,4 +34,13 @@ class AppImages {
   static const String bluish_grey_couch =
       'assets/images/bluish_grey_couch.webp';
   static const String black_couch = 'assets/images/black_couch.webp';
+
+  // SVG Icons
+  static const String svg_sofa = 'assets/icons/svgs/sofa1.svg';
+  static const String svg_bed = 'assets/icons/svgs/bed.svg';
+  static const String svg_table = 'assets/icons/svgs/table2.svg';
+  static const String svg_cupboard = 'assets/icons/svgs/cupboard.svg';
+  static const String svg_dressing = 'assets/icons/svgs/dressing2.svg';
+
+  static const String svg_chair = 'assets/icons/svgs/chair.svg';
 }
