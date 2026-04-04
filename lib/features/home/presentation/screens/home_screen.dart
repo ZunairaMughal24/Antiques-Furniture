@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               PromotionalBannerSlider(banners: banners).px12(),
 
-              20.heightBox,
+              18.heightBox,
 
               const SectionHeader(title: "Categories").px16(),
               8.heightBox,

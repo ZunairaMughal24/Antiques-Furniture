@@ -20,8 +20,13 @@ class AppColors {
   static const Color lightGrey = Color(0xFF8f8f8f);
   static const Color errorRed = Color(0xFFb01819);
 
-  // Neumorphic Design Tokens (Peach Theme)
-  static const Color neumorphicBase = Color(0xFFFDECDA);
-  static const Color neumorphicLight = Color(0xFFFFF9F2);
-  static const Color neumorphicDark = Color(0xFFC79A7A); // Darker Peach-Brown
+  //ivory
+  static const Color neumorphicBase = Color(0xFFEBE6E0);
+  static const Color neumorphicLight = Color(0xFFFFFFFF);
+  static const Color neumorphicDark = Color(0xFFC8BCAF);
+
+  //   // Neumorphic Design Tokens (Peach Theme)
+  // static const Color neumorphicBase = Color(0xFFFDECDA);
+  // static const Color neumorphicLight = Color(0xFFFFF9F2);
+  // static const Color neumorphicDark = Color(0xFFC79A7A); // Darker Peach-Brown
 }
