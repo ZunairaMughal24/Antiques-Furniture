@@ -19,13 +19,19 @@ class SectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: AppTextTheme.bodyMedium().copyWith(fontSize: 15)),
+        Text(
+          title,
+          style: AppTextTheme.bodyMedium().copyWith(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         if (actionText != null)
           GestureDetector(
             onTap: onActionTap,
             child: Text(
               actionText!,
-              style: AppTextTheme.bodyMedium().copyWith(fontSize: 15),
+              style: AppTextTheme.bodyMedium().copyWith(fontSize: 13),
             ),
           ),
       ],

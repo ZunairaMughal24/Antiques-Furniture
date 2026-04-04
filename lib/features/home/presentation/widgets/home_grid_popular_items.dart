@@ -83,7 +83,7 @@ class HomeGridNoScroll extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 2),
+                  padding: const EdgeInsets.only(left: 8),
                   child: Text(
                     item.category,
                     style: AppTextTheme.bodySmall(
@@ -94,15 +94,15 @@ class HomeGridNoScroll extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 8),
+                  padding: const EdgeInsets.only(left: 8, top: 5),
                   child: Row(
                     children: [
                       Text(
                         '\$${item.price}',
                         style: AppTextTheme.monoStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                           color: AppColors.primaryColor,
-                          weight: FontWeight.bold,
+                          weight: FontWeight.w500,
                         ),
                       ),
                       const SizedBox(width: 8),
