@@ -1,11 +1,11 @@
-import 'package:antiques_furniture/features/cart/presentation/screens/cart_screen.dart';
+
 import 'package:antiques_furniture/features/categories/presentation/screens/categories_screen.dart';
 import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
 import 'package:antiques_furniture/features/home/domain/models/new_collection_model.dart';
-import 'package:antiques_furniture/features/home/presentation/screens/home_screen.dart';
 import 'package:antiques_furniture/features/home/presentation/screens/new_collection_detail_screen.dart';
 import 'package:antiques_furniture/features/home/presentation/screens/popular_items_detail_screen.dart';
 import 'package:antiques_furniture/features/login/presentation/screens/login_screen.dart';
+import 'package:antiques_furniture/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:antiques_furniture/features/sign_up/presentation/screens/sign_up_screen.dart';
 
 import 'package:antiques_furniture/home.dart';
@@ -39,6 +39,7 @@ CustomTransitionPage<void> buildSlideTransition({
 
 abstract class AppRoutes {
   static const String splashScreenRoute = '/splash_screen';
+  static const String onboardingScreenRoute = '/onboarding';
   static const String popularItemsDetailScreenRoute = '/product_detail';
   static const String newColectionDetailScreenRoute = '/new_collection_detail';
   static const String categoriesScreenRoute = '/categories_screen';
@@ -61,6 +62,14 @@ final router = GoRouter(
         context: context,
         state: state,
         child: const SplashScreen(),
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.onboardingScreenRoute,
+      pageBuilder: (context, state) => buildSlideTransition(
+        context: context,
+        state: state,
+        child: OnboardingScreen(),
       ),
     ),
     GoRoute(

@@ -35,12 +35,33 @@ class AppImages {
       'assets/images/bluish_grey_couch.webp';
   static const String black_couch = 'assets/images/black_couch.webp';
 
-  // SVG Icons
   static const String svg_sofa = 'assets/icons/svgs/sofa1.svg';
   static const String svg_bed = 'assets/icons/svgs/bed.svg';
   static const String svg_table = 'assets/icons/svgs/table2.svg';
   static const String svg_cupboard = 'assets/icons/svgs/cupboard.svg';
   static const String svg_dressing = 'assets/icons/svgs/dressing2.svg';
-
   static const String svg_chair = 'assets/icons/svgs/chair.svg';
+  static const String svg_eye_closed = 'assets/icons/svgs/eye-closed.svg';
+  static const String svg_user = 'assets/icons/svgs/user.svg';
+  static const String svg_lock = 'assets/icons/svgs/lock.svg';
+  static const String svg_lock1 = 'assets/icons/svgs/lock1.svg';
+  static const String svg_bell = 'assets/icons/svgs/bell.svg';
+  static const String svg_home = 'assets/icons/svgs/home.svg';
+  static const String svg_home_angle = 'assets/icons/svgs/home-angle.svg';
+  static const String svg_kitchen = 'assets/icons/svgs/kitchen.svg';
+  static const String svg_mirror = 'assets/icons/svgs/mirror.svg';
+  static const String svg_trash = 'assets/icons/svgs/trash-bin.svg';
+  static const String svg_chair1 = 'assets/icons/svgs/chair1.svg';
+  static const String svg_chair2 = 'assets/icons/svgs/chair2.svg';
+  static const String svg_cupboard1 = 'assets/icons/svgs/cupboard1.svg';
+  static const String svg_dresser = 'assets/icons/svgs/dresser.svg';
+  static const String svg_dressing1 = 'assets/icons/svgs/dressing1.svg';
+  static const String svg_sofa1 = 'assets/icons/svgs/sofa.svg';
+  static const String svg_table1 = 'assets/icons/svgs/table1.svg';
+  static const String svg_table3 = 'assets/icons/svgs/table3.svg';
+  static const String svg_table4 = 'assets/icons/svgs/table4.svg';
+  static const String svg_table5 = 'assets/icons/svgs/table5.svg';
+
+
+  static const String auth_bg_wood = 'assets/images/auth_bg_wood.jpg';
 }

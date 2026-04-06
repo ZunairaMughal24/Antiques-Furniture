@@ -19,9 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        context.go(AppRoutes.signUpScreenRoute);
+        context.go(AppRoutes.onboardingScreenRoute);
       }
     });
   }
@@ -30,42 +30,62 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final dimensions = Dimensions(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              color: AppColors.primaryColor,
-              width: dimensions.width * 0.3 - dimensions.height * 0.03,
-              child: Image.asset(AppImages.splash1, color: AppColors.white),
-            ),
-            8.heightBox,
-            Column(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Container(color: AppColors.white),
+
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Antiques',
-                  style: AppTextTheme.logoStyle(
-                    fontSize: 20,
-                    weight: FontWeight.bold,
-                    letterSpacing: 2,
-                    color: AppColors.primaryColor,
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.9),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primaryColor.withOpacity(0.3),
+                        blurRadius: 24,
+                        spreadRadius: 4,
+                      ),
+                    ],
+                  ),
+                  width: dimensions.width * 0.28,
+                  height: dimensions.width * 0.28,
+                  child: Center(
+                    child: Image.asset(
+                      AppImages.splash1,
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
+                20.heightBox,
                 Text(
-                  'Furniture',
+                  'ANTIQUES',
                   style: AppTextTheme.logoStyle(
-                    fontSize: 13,
+                    fontSize: 30,
                     weight: FontWeight.bold,
-                    letterSpacing: 2,
+                    letterSpacing: 4,
+                    color: AppColors.blackColor,
+                  ),
+                ),
+                4.heightBox,
+                Text(
+                  'FURNITURE',
+                  style: AppTextTheme.logoStyle(
+                    fontSize: 14,
+                    weight: FontWeight.w500,
+                    letterSpacing: 6,
                     color: AppColors.primaryColor,
                   ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    ).safeArea();
+    );
   }
 }

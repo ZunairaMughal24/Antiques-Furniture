@@ -2,14 +2,16 @@ import 'dart:developer';
 
 import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
+import 'package:antiques_furniture/core/utils/app_images.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/app_validators.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/widgets/auth_card.dart';
+
 import 'package:antiques_furniture/widgets/primary_button.dart';
 import 'package:antiques_furniture/widgets/primary_textFeild.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -26,11 +28,13 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool _passwordVisible = false;
+  bool _rememberMe = false;
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
       log('Email: ${_emailController.text}');
       log('Password: ${_passwordController.text}');
+      log('Remember Me: $_rememberMe');
     }
   }
 
@@ -44,120 +48,231 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: AuthCard(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  50.heightBox,
-                  Text(
-                    "ANTIQUES",
-                    style: AppTextTheme.logoStyle(
-                      color: Colors.brown,
-                      fontSize: 24,
-                      weight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "Furniture",
-                    style: AppTextTheme.logoStyle(
-                      color: AppColors.primaryColor,
-                      weight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
+      backgroundColor: AppColors.white,
+      body: Stack(
+        children: [
+          //Top Background Image
+          Image.asset(
+            AppImages.auth_bg_wood,
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
 
-                  Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        20.heightBox,
-                        Text(
-                          "Login",
-                          style: AppTextTheme.h4(
-                            weight: FontWeight.bold,
-                          ),
-                        ).pOnly(left: 6),
-                        8.heightBox,
-                        Text(
-                          'Please enter your email and password to access your account.',
-                          style: AppTextTheme.bodyMedium(
-                            color: AppColors.lightGrey,
-                          ).copyWith(fontSize: 15),
-                        ).pOnly(left: 6),
+          SafeArea(
+            child: Column(
+              children: [
+                //Spacer for top area to let background show
+                SizedBox(height: MediaQuery.of(context).size.height * 0.20),
+
+                //Main Bottom Content Container
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, -2),
+                        ),
                       ],
                     ),
-                  ),
-                  15.heightBox,
-                  PrimaryTextField(
-                    controller: _emailController,
-                    labelText: "Email",
-
-                    prefixIcon: const Icon(Icons.email),
-                    validator: Validators.validateEmail,
-                  ),
-                  8.heightBox,
-                  PrimaryTextField(
-                    controller: _passwordController,
-                    labelText: "Password",
-                    obscureText: !_passwordVisible,
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.only(
+                        left: 24,
+                        right: 24,
+                        top: 32,
+                        bottom: 20,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _passwordVisible = !_passwordVisible;
-                        });
-                      },
-                    ),
-                    validator: Validators.validatePassword,
-                  ),
-                  20.heightBox,
-                  PrimaryButton(
-                    text: 'Login',
-                    onTap: () {
-                      _submit;
-                      context.push(AppRoutes.homeScreenRoute);
-                    },
-                  ),
-                  10.heightBox,
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account? ",
-                        style: AppTextTheme.bodyMedium(
-                          color: Colors.black,
-                          weight: FontWeight.w500,
-                        ).copyWith(fontSize: 14),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.push(AppRoutes.signUpScreenRoute);
-                        },
-                        child: Text(
-                          'Create Account',
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            Text(
+                              "ANTIQUES",
+                              style: AppTextTheme.logoStyle(
+                                color: Colors.brown,
+                                fontSize: 24,
+                                weight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Furniture",
+                              style: AppTextTheme.logoStyle(
+                                color: AppColors.primaryColor,
+                                weight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
 
-                          style: AppTextTheme.bodyMedium(
-                            weight: FontWeight.w500,
-                            color: AppColors.primaryColor,
-                          ).copyWith(fontSize: 14),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                30.heightBox,
+                                Text(
+                                  "Login",
+                                  style: AppTextTheme.h4(
+                                    weight: FontWeight.bold,
+                                  ),
+                                ).pOnly(left: 6),
+                                8.heightBox,
+                                Text(
+                                  'Please enter your email and password to access your account.',
+                                  style: AppTextTheme.bodyMedium(
+                                    color: AppColors.lightGrey,
+                                  ).copyWith(fontSize: 15),
+                                ).pOnly(left: 6),
+                              ],
+                            ),
+                            20.heightBox,
+                            PrimaryTextField(
+                              controller: _emailController,
+                              labelText: "Email",
+                              prefixIcon: const Icon(Icons.email),
+                              validator: Validators.validateEmail,
+                            ),
+                            12.heightBox,
+                            PrimaryTextField(
+                              controller: _passwordController,
+                              labelText: "Password",
+                              obscureText: !_passwordVisible,
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: _passwordVisible
+                                    ? const Icon(
+                                        Icons.visibility,
+                                        color: AppColors.lightGrey,
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: SvgPicture.asset(
+                                          AppImages.svg_eye_closed,
+                                          colorFilter: const ColorFilter.mode(
+                                            AppColors.lightGrey,
+                                            BlendMode.srcIn,
+                                          ),
+                                        ),
+                                      ),
+                                onPressed: () {
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              ),
+                              validator: Validators.validatePassword,
+                            ),
+                            // Remember Me row
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 4),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: Checkbox(
+                                      value: _rememberMe,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _rememberMe = value ?? false;
+                                        });
+                                      },
+                                      activeColor: AppColors.primaryColor,
+                                      checkColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      side: BorderSide(
+                                        color: AppColors.lightGrey,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _rememberMe = !_rememberMe;
+                                      });
+                                    },
+                                    child: Text(
+                                      "Remember me",
+                                      style: AppTextTheme.bodySmall(
+                                        color: AppColors.darkGrey,
+                                        weight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () {
+                                      // TODO: Forgot password navigation
+                                    },
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      minimumSize: Size.zero,
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                    child: Text(
+                                      "Forgot Password?",
+                                      style: AppTextTheme.bodySmall(
+                                        color: AppColors.primaryColor,
+                                        weight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            20.heightBox,
+                            PrimaryButton(
+                              text: 'Login',
+                              onTap: () {
+                                _submit();
+                                context.push(AppRoutes.homeScreenRoute);
+                              },
+                            ),
+                            6.heightBox,
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have an account? ",
+                                  style: AppTextTheme.bodyMedium(
+                                    color: Colors.black,
+                                    weight: FontWeight.w500,
+                                  ).copyWith(fontSize: 14),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    context.push(AppRoutes.signUpScreenRoute);
+                                  },
+                                  child: Text(
+                                    'Create Account',
+                                    style: AppTextTheme.bodyMedium(
+                                      weight: FontWeight.w600,
+                                      color: AppColors.primaryColor,
+                                    ).copyWith(fontSize: 14),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ).px8(),
-                ],
-              ).px12(),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ).pOnly(left: 16, right: 16, top: 50).safeArea(),
-        ),
+          ),
+        ],
       ),
     );
   }

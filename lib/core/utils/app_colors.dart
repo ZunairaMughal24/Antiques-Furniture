@@ -25,7 +25,7 @@ class AppColors {
   static const Color neumorphicLight = Color(0xFFFFFFFF);
   static const Color neumorphicDark = Color(0xFFC8BCAF);
 
-  //   // Neumorphic Design Tokens (Peach Theme)
+  // Neumorphic Design Tokens (Peach Theme)
   // static const Color neumorphicBase = Color(0xFFFDECDA);
   // static const Color neumorphicLight = Color(0xFFFFF9F2);
   // static const Color neumorphicDark = Color(0xFFC79A7A); // Darker Peach-Brown

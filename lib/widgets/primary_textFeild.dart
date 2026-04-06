@@ -79,7 +79,9 @@ class PrimaryTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          style: AppTextTheme.bodyMedium(color: textColor ?? AppColors.pureBlack),
+          style: AppTextTheme.bodyMedium(
+            color: textColor ?? AppColors.pureBlack,
+          ),
           autofocus: autoFocus,
           readOnly: !enabled || onTap != null,
           onTap: onTap,
@@ -108,7 +110,7 @@ class PrimaryTextField extends StatelessWidget {
           decoration: InputDecoration(
             isDense: true,
             filled: filled,
-            fillColor: fillColor ?? AppColors.white,
+            fillColor: fillColor ?? const Color(0xFFF4F4F4),
             contentPadding:
                 contentPadding ??
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -116,31 +118,34 @@ class PrimaryTextField extends StatelessWidget {
             border:
                 border ??
                 OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 14),
-                  borderSide: const BorderSide(color: AppColors.lightGrey),
+                  borderRadius: BorderRadius.circular(borderRadius ?? 30),
+                  borderSide: BorderSide.none,
                 ),
 
             enabledBorder:
                 border ??
                 OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius ?? 14),
-                  borderSide: const BorderSide(color: AppColors.lightGrey),
+                  borderRadius: BorderRadius.circular(borderRadius ?? 15),
+                  borderSide: BorderSide.none,
                 ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 14),
-              borderSide: BorderSide(color: AppColors.buttonColor, width: 1.5),
-            ),
-
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 14),
-              borderSide: const BorderSide(
-                color: AppColors.errorRed,
+              borderRadius: BorderRadius.circular(borderRadius ?? 15),
+              borderSide: BorderSide(
+                color: AppColors.buttonColor.withOpacity(0.5),
                 width: 1.5,
               ),
             ),
 
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 30),
+              borderSide: const BorderSide(
+                color: AppColors.errorRed,
+                width: 1.2,
+              ),
+            ),
+
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 14),
+              borderRadius: BorderRadius.circular(borderRadius ?? 30),
               borderSide: const BorderSide(
                 color: AppColors.errorRed,
                 width: 1.5,
@@ -150,11 +155,12 @@ class PrimaryTextField extends StatelessWidget {
             hintText: hintText,
             labelStyle: AppTextTheme.bodyMedium().copyWith(
               color: hintTextColor ?? AppColors.darkGrey,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
             hintStyle: AppTextTheme.bodyMedium().copyWith(
-              color: hintTextColor ?? AppColors.darkGrey,
-              fontWeight: FontWeight.w600,
+              fontSize: 15,
+              color: hintTextColor ?? AppColors.lightGrey,
+              fontWeight: FontWeight.w400,
             ),
 
             errorStyle: AppTextTheme.bodySmall(color: AppColors.errorRed),

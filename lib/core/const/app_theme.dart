@@ -11,7 +11,7 @@ class AppTheme {
       primaryColor: primaryLight,
       dividerColor: Colors.grey,
       scaffoldBackgroundColor: AppColors.neumorphicBase,
-      fontFamily: GoogleFonts.nunito().fontFamily,
+      fontFamily: GoogleFonts.nunito().fontFamily ?? 'Nunito',
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryLight,
         brightness: Brightness.light,
