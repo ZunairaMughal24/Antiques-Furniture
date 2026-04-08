@@ -1,5 +1,6 @@
 import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
+import 'package:antiques_furniture/core/utils/app_images.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
 import 'package:antiques_furniture/widgets/primary_button.dart';
@@ -23,28 +24,28 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   final List<_OnboardingSlide> _slides = const [
     _OnboardingSlide(
-      tag: "PREMIUM COLLECTION",
-      title: "Discover\nTimeless Elegance",
+      tag: "CURATED SELECTION",
+      title: "Discover\nTimeless Heritage",
       description:
-          "Bring timeless elegance into your home. Explore our curated selection of premium antique furniture.",
-      icon: Icons.auto_awesome,
-      image: "assets/images/auth_bg_antique.jpg",
+          "Experience the artistry of past eras. Our curated collection brings museum-quality antiques into your contemporary living space.",
+      icon: Icons.vignette_rounded,
+      image: AppImages.premium_sofa,
     ),
     _OnboardingSlide(
-      tag: "HANDCRAFTED QUALITY",
-      title: "Artisan\nCraftsmanship",
+      tag: "ARTISAN QUALITY",
+      title: "Illuminating\nMasterpieces",
       description:
-          "Every piece tells a story. Meticulously restored and handcrafted furniture from master artisans around the world.",
-      icon: Icons.handyman,
-      image: "assets/images/auth_bg_furniture.jpg",
+          "Each piece carries a legacy of master craftsmanship. Discover unique lighting that defines the soul of a room.",
+      icon: Icons.light_outlined,
+      image: AppImages.elegant_lamp,
     ),
     _OnboardingSlide(
-      tag: "EXCLUSIVE DEALS",
-      title: "Your Dream\nHome Awaits",
+      tag: "BOUTIQUE LUXURY",
+      title: "Defining Your\nUnique Sanctuary",
       description:
-          "Transform your living spaces with authentic vintage pieces. Enjoy exclusive deals on rare collectibles.",
-      icon: Icons.home_rounded,
-      image: "assets/images/auth_bg_wood_antique.jpg",
+          "Furniture that does more than fill a space. Find the statement pieces that tell your personal story of elegance.",
+      icon: Icons.auto_awesome_mosaic_outlined,
+      image: AppImages.antique_cabinet,
     ),
   ];
 
@@ -107,12 +108,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
+                    Colors.black.withOpacity(0.35),
                     Colors.transparent,
-                    Colors.black.withOpacity(0.5),
-                    Colors.black.withOpacity(0.9),
+                    Colors.black.withOpacity(0.55),
+                    Colors.black,
                   ],
-                  stops: const [0.0, 0.4, 0.7, 1.0],
+                  stops: const [0.0, 0.45, 0.75, 1.0],
                 ),
               ),
             ),
@@ -122,75 +123,67 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           SafeArea(
             child: Column(
               children: [
-                // Top bar with logo and skip
+                // Stable Professional Header (Anti-Overflow Layout)
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28.0,
-                    vertical: 16,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(28.0, 20.0, 12.0, 12.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor.withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: AppColors.primaryColor.withOpacity(0.3),
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.weekend_rounded,
-                          color: AppColors.primaryColor,
-                          size: 22,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      // Boutique Branding
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            "ANTIQUES",
-                            style: AppTextTheme.logoStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              weight: FontWeight.bold,
-                            ).copyWith(letterSpacing: 2),
+                          Icon(
+                            Icons.vignette_rounded,
+                            color: AppColors.primaryColor,
+                            size: 24,
                           ),
-                          Text(
-                            "Furniture",
-                            style: AppTextTheme.logoStyle(
-                              color: AppColors.primaryColor,
-                              fontSize: 11,
-                              weight: FontWeight.w600,
-                            ).copyWith(letterSpacing: 1),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "ANTIQUES",
+                                style: AppTextTheme.logoStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  weight: FontWeight.bold,
+                                ).copyWith(letterSpacing: 2),
+                              ),
+                              Text(
+                                "FURNITURE",
+                                style: AppTextTheme.logoStyle(
+                                  color: AppColors.primaryColor,
+                                  fontSize: 9,
+                                  weight: FontWeight.w600,
+                                ).copyWith(letterSpacing: 1.5),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      const Spacer(),
-                      //Skip button
+
+                      // Discreet Skip Button
                       TextButton(
                         onPressed: () {
                           context.push(AppRoutes.loginScreenRoute);
                         },
                         style: TextButton.styleFrom(
+                          minimumSize: Size.zero,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 6,
+                            horizontal: 12,
+                            vertical: 8,
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide(
-                              color: Colors.white.withOpacity(0.2),
-                            ),
-                          ),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(
-                          "Skip",
+                          "SKIP",
                           style: AppTextTheme.bodySmall(
-                            color: Colors.white,
-                            weight: FontWeight.w600,
-                          ),
+                            color: Colors.white.withOpacity(0.4),
+                            weight: FontWeight.bold,
+                          ).copyWith(letterSpacing: 1.2),
                         ),
                       ),
                     ],
@@ -199,7 +192,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
                 const Spacer(),
 
-                // Slide content area with horizontal translation
+                // Slide content area with horizontal translation and centered text
                 Expanded(
                   child: PageView.builder(
                     controller: _pageController,
@@ -211,73 +204,89 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         builder: (context, _) {
                           double slideProgress =
                               (_scrollOffset / size.width) - index;
-                          double opacity = (1.0 - slideProgress.abs()).clamp(
-                            0.0,
-                            1.0,
-                          );
+                          double opacity =
+                              (1.0 - slideProgress.abs()).clamp(0.0, 1.0);
                           double horizontalOffset = slideProgress * 100;
 
                           return Opacity(
                             opacity: opacity * _fadeController.value,
                             child: Transform.translate(
                               offset: Offset(horizontalOffset, 0),
-                              child: SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 28.0,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // Branding Tag
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 14,
-                                          vertical: 6,
+                              child: Center(
+                                child: SingleChildScrollView(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 32.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        // Minimalist Branding Label
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 24,
+                                              height: 1,
+                                              color: AppColors.primaryColor
+                                                  .withOpacity(0.5),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 12.0),
+                                              child: Text(
+                                                _slides[index].tag,
+                                                style: AppTextTheme.caption(
+                                                  color: AppColors.primaryColor,
+                                                  weight: FontWeight.w600,
+                                                ).copyWith(letterSpacing: 2),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 24,
+                                              height: 1,
+                                              color: AppColors.primaryColor
+                                                  .withOpacity(0.5),
+                                            ),
+                                          ],
                                         ),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.primaryColor
-                                              .withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                            20,
-                                          ),
-                                          border: Border.all(
-                                            color: AppColors.primaryColor
-                                                .withOpacity(0.4),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          _slides[index].tag,
-                                          style: AppTextTheme.caption(
-                                            color: AppColors.primaryColor,
+                                        16.heightBox,
+
+                                        // Title: Impact-Safe Editorial Serif
+                                        Text(
+                                          _slides[index].title,
+                                          textAlign: TextAlign.center,
+                                          style: AppTextTheme.logoStyle(
+                                            color: Colors.white,
+                                            fontSize: 32,
                                             weight: FontWeight.w700,
-                                          ).copyWith(letterSpacing: 1.5),
+                                          ).copyWith(
+                                            height: 1.15,
+                                            letterSpacing: 0.5,
+                                          ),
                                         ),
-                                      ),
-                                      12.heightBox,
+                                        16.heightBox,
 
-                                      // Title
-                                      Text(
-                                        _slides[index].title,
-                                        style: AppTextTheme.logoStyle(
-                                          color: Colors.white,
-                                          fontSize: 34,
-                                          weight: FontWeight.w700,
-                                        ).copyWith(height: 1.1),
-                                      ),
-                                      8.heightBox,
-
-                                      // Description
-                                      Text(
-                                        _slides[index].description,
-                                        style: AppTextTheme.bodyMedium(
-                                          color: Colors.white.withOpacity(0.85),
-                                        ).copyWith(height: 1.6),
-                                      ),
-                                      20.heightBox,
-                                    ],
+                                        // Description: Premium Sans-Serif
+                                        Text(
+                                          _slides[index].description,
+                                          textAlign: TextAlign.center,
+                                          style: AppTextTheme.bodyMedium(
+                                            color:
+                                                Colors.white.withOpacity(0.7),
+                                          ).copyWith(
+                                            height: 1.8,
+                                            letterSpacing: 0.5,
+                                          ),
+                                        ),
+                                        // Extra space for footer balance
+                                        40.heightBox,
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -289,34 +298,33 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   ),
                 ),
 
-                const SizedBox(height: 8),
-
-                //Footer section: Indicators and Buttons
+                // Footer section: Refined Indicators and Premium Buttons
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28.0),
                   child: Column(
                     children: [
-                      //Indicators
+                      // Refined Gold Indicators
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           _slides.length,
                           (index) => AnimatedContainer(
-                            duration: const Duration(milliseconds: 350),
-                            curve: Curves.easeOutCubic,
-                            margin: const EdgeInsets.only(right: 8),
-                            height: 4,
-                            width: _currentPage == index ? 40 : 12,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeOutQuint,
+                            margin: const EdgeInsets.only(right: 12),
+                            height: 5,
+                            width: _currentPage == index ? 32 : 8,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(10),
                               color: _currentPage == index
                                   ? AppColors.primaryColor
-                                  : Colors.white.withOpacity(0.3),
+                                  : Colors.white.withOpacity(0.2),
                               boxShadow: _currentPage == index
                                   ? [
                                       BoxShadow(
                                         color: AppColors.primaryColor
-                                            .withOpacity(0.4),
-                                        blurRadius: 8,
+                                            .withOpacity(0.3),
+                                        blurRadius: 10,
                                         offset: const Offset(0, 2),
                                       ),
                                     ]
@@ -325,9 +333,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 32),
 
-                      //CTA Buttons
+                      // CTA Buttons with clean padding
                       PrimaryButton(
                         text: _currentPage == _slides.length - 1
                             ? 'Get Started'
@@ -335,8 +343,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         onTap: () {
                           if (_currentPage < _slides.length - 1) {
                             _pageController.nextPage(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInOutCubic,
+                              duration: const Duration(milliseconds: 600),
+                              curve: Curves.easeOutQuart,
                             );
                           } else {
                             context.push(AppRoutes.loginScreenRoute);
@@ -345,21 +353,21 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         suffixIcon: const Icon(
                           Icons.arrow_forward_rounded,
                           color: Colors.black,
-                          size: 20,
+                          size: 18,
                         ),
                       ),
-                      14.heightBox,
+                      12.heightBox,
                       TextButton(
                         onPressed: () {
                           context.push(AppRoutes.signUpScreenRoute);
                         },
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 18),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: const BorderSide(
-                              color: AppColors.primaryColor,
-                              width: 1.5,
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: AppColors.primaryColor.withOpacity(0.5),
+                              width: 1,
                             ),
                           ),
                           minimumSize: const Size(double.infinity, 56),
@@ -367,12 +375,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         child: Text(
                           'Create an Account',
                           style: AppTextTheme.bodyMedium(
-                            color: AppColors.primaryColor,
-                            weight: FontWeight.w700,
-                          ),
+                            color: Colors.white,
+                            weight: FontWeight.w600,
+                          ).copyWith(letterSpacing: 1),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 30),
                     ],
                   ),
                 ),

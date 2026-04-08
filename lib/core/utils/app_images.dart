@@ -63,5 +63,8 @@ class AppImages {
   static const String svg_table5 = 'assets/icons/svgs/table5.svg';
 
 
+  static const String premium_sofa = 'assets/images/premium_sofa.png';
+  static const String elegant_lamp = 'assets/images/elegant_lamp.png';
+  static const String antique_cabinet = 'assets/images/antique_cabinet.png';
   static const String auth_bg_wood = 'assets/images/auth_bg_wood.jpg';
 }
