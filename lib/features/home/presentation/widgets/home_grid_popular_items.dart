@@ -2,7 +2,7 @@ import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
-import 'package:antiques_furniture/widgets/neumorphic_box.dart';
+import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +18,7 @@ class HomeGridNoScroll extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.70,
+        childAspectRatio: 0.65, // Taller card for content safety
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
       ),
@@ -30,50 +30,49 @@ class HomeGridNoScroll extends StatelessWidget {
             AppRoutes.popularItemsDetailScreenRoute,
             extra: item,
           ),
-          child: NeumorphicBox(
+          child: AppContainer(
             borderRadius: 15,
-            depth: 4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                      ),
-                      child: Image.asset(
-                        item.image,
-                        height: 140,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Positioned(
-                      right: 8,
-                      bottom: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          item.image,
+                          height: 120,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                          right: 8,
+                          bottom: 8,
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                             ),
-                          ],
+                            child: const Icon(
+                              Icons.shopping_bag_outlined,
+                              color: AppColors.primaryColor,
+                              size: 16,
+                            ),
+                          ),
                         ),
-                        child: const Icon(
-                          Icons.shopping_bag_outlined,
-                          color: AppColors.primaryColor,
-                          size: 18,
-                        ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8, top: 8),

@@ -1,7 +1,7 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/widgets/neumorphic_box.dart';
+import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 
 import 'package:antiques_furniture/core/utils/app_images.dart';
@@ -29,53 +29,49 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 110,
+      height: 110, // Increased to prevent overflow
       child: ListView.builder(
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,
         itemCount: categoryList.length,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         itemBuilder: (context, index) {
           final isSelected = selectedIndex == index;
           final category = categoryList[index];
 
           return Padding(
-            padding: const EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 22),
             child: GestureDetector(
               onTap: () => setState(() => selectedIndex = index),
               child: Column(
                 children: [
-                  NeumorphicBox(
-                    borderRadius: 30,
-                    depth: isSelected ? 2 : 8,
-                    color: null,
-                    padding: EdgeInsets.zero,
+                  AppContainer(
+                    borderRadius: 15, // Slightly less rounded for smaller size
+                    color: isSelected ? AppColors.accentGold.withOpacity(0.1) : AppColors.neumorphicBase,
+                    boxShadow: isSelected ? [] : null,
+                    border: isSelected ? Border.all(color: AppColors.accentGold, width: 2) : null,
                     child: Container(
-                      width: 60,
-                      height: 60,
-                      padding: const EdgeInsets.all(16),
+                      width: 55,
+                      height: 55,
+                      padding: const EdgeInsets.all(14),
                       child: SvgPicture.asset(
                         category["icon"]!,
-                        width: 28,
-                        height: 28,
-                        fit: BoxFit.contain,
-                        alignment: Alignment.center,
                         colorFilter: ColorFilter.mode(
-                          isSelected ? AppColors.primaryColor : Colors.black87,
+                          isSelected ? AppColors.accentGold : Colors.black87,
                           BlendMode.srcIn,
                         ),
                       ),
                     ),
                   ),
 
-                  8.heightBox,
+                  10.heightBox,
 
                   Text(
                     category["name"] as String,
-                    style: AppTextTheme.bodySmall(
-                      weight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? AppColors.primaryColor : Colors.black,
-                    ).copyWith(fontSize: 12),
+                    style: AppTextTheme.bodyMedium(
+                      weight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      color: isSelected ? AppColors.accentGold : Colors.black54,
+                    ).copyWith(fontSize: 14),
                   ),
                 ],
               ),

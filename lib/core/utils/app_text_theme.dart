@@ -229,4 +229,19 @@ class AppTextTheme {
     color: color,
     lineHeight: lineHeight ?? 1.3,
   );
+
+  // Editorial Serif (Playfair Display)
+  static TextStyle editorialStyle({
+    Color? color,
+    double fontSize = 24,
+    FontWeight weight = FontWeight.w600,
+    double? lineHeight,
+    double? letterSpacing,
+  }) => GoogleFonts.playfairDisplay(
+    fontSize: fontSize,
+    color: color ?? Colors.black87,
+    fontWeight: weight,
+    height: lineHeight ?? 1.2,
+    letterSpacing: letterSpacing,
+  );
 }

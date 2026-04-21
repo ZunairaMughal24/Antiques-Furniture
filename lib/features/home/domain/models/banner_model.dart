@@ -15,9 +15,9 @@ class BannerModel {
 final List<BannerModel> banners = [
   BannerModel(
     image: AppImages.home_couch,
-    heading: "Furnish Your Dreams With Timeless and Elegant Furniture",
+    heading: "FURNISH\nYOUR DREAMS",
     subheading:
-        "Discover unique pieces crafted for inspired living spaces and lasting comfort",
+        "with timeless, elegant, and durable pieces for inspired living spaces.",
   ),
   BannerModel(
     image: AppImages.home_couch1,

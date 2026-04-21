@@ -18,14 +18,14 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          title,
-          style: AppTextTheme.logoStyle().copyWith(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5,
-          ),
+          title.toUpperCase(),
+          style: AppTextTheme.editorialStyle(
+            weight: FontWeight.w700,
+            letterSpacing: 1.0,
+          ).copyWith(fontSize: 20, color: Colors.black87),
         ),
         if (actionText != null)
           GestureDetector(
@@ -33,9 +33,9 @@ class SectionHeader extends StatelessWidget {
             child: Text(
               actionText!,
               style: AppTextTheme.bodySmall(
-                color: AppColors.primaryColor,
-                weight: FontWeight.bold,
-              ).copyWith(fontSize: 13),
+                color: AppColors.accentGold,
+                weight: FontWeight.w500,
+              ).copyWith(fontSize: 14),
             ),
           ),
       ],

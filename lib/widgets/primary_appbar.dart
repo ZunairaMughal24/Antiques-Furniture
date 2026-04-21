@@ -1,5 +1,5 @@
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
-import 'package:antiques_furniture/widgets/neumorphic_box.dart';
+import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -67,9 +67,8 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget _buildActionIcon({required IconData icon, VoidCallback? onTap}) {
-    return NeumorphicBox(
+    return AppContainer(
       borderRadius: 12,
-      depth: 6,
       child: SizedBox(
         height: 45,
         width: 45,

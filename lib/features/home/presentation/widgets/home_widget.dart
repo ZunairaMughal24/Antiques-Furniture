@@ -4,7 +4,7 @@ import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
 import 'package:antiques_furniture/features/home/domain/models/banner_model.dart';
-import 'package:antiques_furniture/widgets/neumorphic_box.dart';
+import 'package:antiques_furniture/widgets/app_container.dart';
 
 class PromotionalBannerSlider extends StatefulWidget {
   final List<BannerModel> banners;
@@ -22,14 +22,12 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
 
   @override
   Widget build(BuildContext context) {
-    const double bannerWidth = 330;
-    const double bannerHeight = 170;
-    final double textWidth = bannerWidth * 0.55;
+    const double bannerHeight = 220; // Increased height
 
     return SizedBox(
-      height: bannerHeight + 32,
-      width: bannerWidth,
+      height: bannerHeight,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           PageView.builder(
             controller: _pageController,
@@ -38,71 +36,88 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
             onPageChanged: (index) => setState(() => currentIndex = index),
             itemBuilder: (context, index) {
               final banner = widget.banners[index];
-              return NeumorphicBox(
-                borderRadius: 15,
-                depth: 10,
+              return AppContainer(
+                borderRadius: 24,
+                margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(24),
                   child: Stack(
                     children: [
-                      Image.asset(
-                        banner.image,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-
-                        color: AppColors.neumorphicBase,
-                        colorBlendMode: BlendMode.multiply,
+                      // Full background image
+                      Positioned.fill(
+                        child: Image.asset(
+                          banner.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      // Overlay to ensure text readability
+                      Positioned.fill(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Colors.white.withOpacity(0.9),
+                                Colors.white.withOpacity(0.3),
+                                Colors.transparent,
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
 
-                      Positioned(
-                        left: 12,
-                        top: 35,
-                        child: SizedBox(
-                          width: textWidth,
-
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                banner.heading,
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              banner.heading.toUpperCase(),
+                              style: AppTextTheme.editorialStyle(
+                                weight: FontWeight.w800,
+                                lineHeight: 1.1,
+                                color: Colors.black,
+                              ).copyWith(fontSize: 22),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            6.heightBox,
+                            SizedBox(
+                              width: 170,
+                              child: Text(
+                                banner.subheading,
                                 style: AppTextTheme.bodySmall(
-                                  weight: FontWeight.bold,
-                                  lineHeight: 1.3,
-                                  color: AppColors.pureBlack,
+                                  lineHeight: 1.2,
+                                  color: Colors.black54,
                                 ).copyWith(fontSize: 12),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              4.heightBox,
-                              Text(
-                                banner.subheading,
-                                style: AppTextTheme.caption(
-                                  lineHeight: 1.3,
-                                  color: AppColors.pureBlack,
-                                ).copyWith(fontSize: 9),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              8.heightBox,
-                              Container(
-                                height: 16,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(color: AppColors.darkGrey),
-                                ),
-                                child: Text(
-                                  "shop now",
-                                  style: AppTextTheme.caption().copyWith(
-                                    fontSize: 11,
+                            ),
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () {},
+                              child: AppContainer(
+                                borderRadius: 10,
+                                color: AppColors.neumorphicBase,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(color: AppColors.accentGold.withOpacity(0.5), width: 1),
                                   ),
-                                  textAlign: TextAlign.center,
-                                ).centered(),
+                                  child: Text(
+                                    "shop now",
+                                    style: AppTextTheme.bodyMedium(
+                                      weight: FontWeight.w500,
+                                      color: AppColors.accentGold,
+                                    ).copyWith(fontSize: 14),
+                                  ),
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -111,22 +126,20 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
               );
             },
           ),
-
+          // Indicators inside the container area
           Positioned(
-            bottom: 8,
-            left: 0,
-            right: 0,
+            bottom: 24,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(widget.banners.length, (index) {
                 final bool isActive = index == currentIndex;
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
-                  height: 3,
-                  width: isActive ? 40 : 5,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  height: 4,
+                  width: isActive ? 24 : 12,
                   decoration: BoxDecoration(
-                    color: isActive ? AppColors.white : AppColors.white,
+                    color: isActive ? AppColors.accentGold : Colors.black26,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 );

@@ -1,6 +1,6 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/widgets/neumorphic_box.dart';
+import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -15,9 +15,8 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NeumorphicBox(
+    return AppContainer(
       borderRadius: 30,
-      depth: 10,
       margin: const EdgeInsets.all(16),
       child: Container(
         height: 70,

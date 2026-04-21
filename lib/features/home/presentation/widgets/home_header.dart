@@ -1,6 +1,7 @@
+import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/widgets/neumorphic_box.dart';
+import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -18,12 +19,13 @@ class HomeHeader extends StatelessWidget {
               Builder(
                 builder: (context) => GestureDetector(
                   onTap: () => Scaffold.of(context).openDrawer(),
-                  child: const NeumorphicBox(
-                    borderRadius: 12,
-                    depth: 6,
+                  child: const AppContainer(
+                    borderRadius: 14,
+                    borderColor: Colors.white70,
+                    borderWidth: 1,
                     child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Icon(Icons.menu_rounded, size: 22),
+                      padding: EdgeInsets.all(10),
+                      child: Icon(Icons.more_horiz_rounded, size: 24, color: Colors.black87),
                     ),
                   ),
                 ),
@@ -31,37 +33,48 @@ class HomeHeader extends StatelessWidget {
 
               Text(
                 "HOME",
-                style: AppTextTheme.logoStyle(
-                  weight: FontWeight.w800,
-                  letterSpacing: 2.0,
-                ).copyWith(fontSize: 20),
+                style: AppTextTheme.editorialStyle(
+                  weight: FontWeight.w700,
+                  letterSpacing: 1.2,
+                ).copyWith(fontSize: 22),
               ),
 
-              const NeumorphicBox(
-                borderRadius: 12,
-                depth: 6,
+              const AppContainer(
+                borderRadius: 14,
+                borderColor: Colors.white70,
+                borderWidth: 1,
                 child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(Icons.notifications_none_rounded, size: 22),
+                  padding: EdgeInsets.all(10),
+                  child: Icon(Icons.notifications_none_rounded, size: 24, color: Colors.black87),
                 ),
               ),
             ],
           ),
-          24.heightBox,
+          28.heightBox,
 
-          const NeumorphicBox(
-            borderRadius: 15,
-            depth: 6,
+          AppContainer(
+            borderRadius: 30, // More rounded like the image
+            color: Colors.white.withOpacity(0.5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.03),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
             child: TextField(
               decoration: InputDecoration(
-                hintText: "Search furniture...",
-                hintStyle: TextStyle(color: Colors.black, fontSize: 14),
-                prefixIcon: Icon(Icons.search, color: Colors.black, size: 20),
+                hintText: "Find unique furniture...",
+                hintStyle: const TextStyle(color: Colors.black38, fontSize: 16),
+                prefixIcon: const Padding(
+                  padding: EdgeInsets.only(left: 12, right: 8),
+                  child: Icon(Icons.search, color: AppColors.accentGold, size: 24),
+                ),
                 border: InputBorder.none,
                 isDense: true,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 16,
                 ),
               ),
             ),
