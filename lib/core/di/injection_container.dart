@@ -32,6 +32,11 @@ import 'package:antiques_furniture/features/login/domain/usecases/login_usecase.
 import 'package:antiques_furniture/features/login/domain/usecases/logout_usecase.dart';
 import 'package:antiques_furniture/features/login/domain/usecases/sign_up_usecase.dart';
 import 'package:antiques_furniture/features/login/presentation/providers/auth_provider.dart';
+import 'package:antiques_furniture/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:antiques_furniture/features/favorites/domain/repositories/favorites_repository.dart';
+import 'package:antiques_furniture/features/favorites/domain/usecases/toggle_favorite_usecase.dart';
+import 'package:antiques_furniture/features/favorites/domain/usecases/is_favorite_usecase.dart';
+import 'package:antiques_furniture/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -145,5 +150,21 @@ Future<void> init() async {
   // Repository
   sl.registerLazySingleton<IPhotoRepository>(
     () => PhotoRepositoryImpl(),
+  );
+
+  //! Features - Favorites
+  // Provider
+  sl.registerFactory<FavoritesProvider>(() => FavoritesProvider(
+        toggleFavoriteUseCase: sl(),
+        isFavoriteUseCase: sl(),
+      ));
+
+  // Use cases
+  sl.registerLazySingleton<ToggleFavoriteUseCase>(() => ToggleFavoriteUseCase(sl()));
+  sl.registerLazySingleton<IsFavoriteUseCase>(() => IsFavoriteUseCase(sl()));
+
+  // Repository
+  sl.registerLazySingleton<FavoritesRepository>(
+    () => FavoritesRepositoryImpl(),
   );
 }

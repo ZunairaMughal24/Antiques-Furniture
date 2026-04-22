@@ -5,6 +5,7 @@ import 'package:antiques_furniture/features/home/presentation/providers/home_pro
 import 'package:antiques_furniture/features/onboarding/presentation/providers/onboarding_provider.dart';
 import 'package:antiques_furniture/features/categories/presentation/providers/categories_provider.dart';
 import 'package:antiques_furniture/features/login/presentation/providers/auth_provider.dart';
+import 'package:antiques_furniture/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:antiques_furniture/core/di/injection_container.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => di.sl<CartProvider>()),
         ChangeNotifierProvider(create: (context) => di.sl<OnboardingProvider>()),
         ChangeNotifierProvider(create: (context) => di.sl<CategoriesProvider>()),
+        ChangeNotifierProvider(create: (context) => di.sl<FavoritesProvider>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

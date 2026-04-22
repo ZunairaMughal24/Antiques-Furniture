@@ -122,7 +122,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             product: item,
                             onTap: () {
                               context.push(
-                                AppRoutes.popularItemsDetailScreenRoute,
+                                AppRoutes.productDetailRoute,
                                 extra: item,
                               );
                             },

@@ -2,7 +2,6 @@ import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
 import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
 import 'package:antiques_furniture/features/home/presentation/providers/home_provider.dart';
 import 'package:antiques_furniture/features/home/presentation/widgets/category_chips.dart';
@@ -10,6 +9,7 @@ import 'package:antiques_furniture/features/home/presentation/widgets/home_heade
 import 'package:antiques_furniture/features/home/presentation/widgets/home_widget.dart';
 import 'package:antiques_furniture/features/home/presentation/widgets/app_drawer.dart';
 import 'package:antiques_furniture/features/home/presentation/widgets/home_loading_skeleton.dart';
+import 'package:antiques_furniture/widgets/add_to_cart_button.dart';
 import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:antiques_furniture/widgets/section_header.dart';
 import 'package:antiques_furniture/config/router.dart';
@@ -76,12 +76,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.68,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.68,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                        ),
                     itemCount: homeProvider.categoryProducts.length,
                     itemBuilder: (context, index) {
                       final item = homeProvider.categoryProducts[index];
@@ -107,10 +108,7 @@ class _CollectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(
-          AppRoutes.popularItemsDetailScreenRoute,
-          extra: product,
-        );
+        context.push(AppRoutes.productDetailRoute, extra: product);
       },
       child: AppContainer(
         borderRadius: 24,
@@ -128,11 +126,14 @@ class _CollectionCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   child: Stack(
                     children: [
-                      Image.asset(
-                        product.image,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
+                      Hero(
+                        tag: product.id,
+                        child: Image.asset(
+                          product.image,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Positioned(
                         top: 10,
@@ -158,37 +159,7 @@ class _CollectionCard extends StatelessWidget {
                       Positioned(
                         right: 8,
                         bottom: 8,
-                        child: GestureDetector(
-                          onTap: () {
-                            context.read<CartProvider>().addItem(product);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('${product.name} added to cart!'),
-                                backgroundColor: AppColors.primaryColor,
-                                duration: const Duration(seconds: 1),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.shopping_bag_outlined,
-                              color: AppColors.primaryColor,
-                              size: 16,
-                            ),
-                          ),
-                        ),
+                        child: AddToCartIconButton(product: product),
                       ),
                     ],
                   ),
@@ -246,4 +217,3 @@ class _CollectionCard extends StatelessWidget {
     );
   }
 }
-

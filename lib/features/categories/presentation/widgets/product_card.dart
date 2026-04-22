@@ -1,9 +1,8 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
-import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
 import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
+import 'package:antiques_furniture/widgets/add_to_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEntity product;
@@ -29,41 +28,20 @@ class ProductCard extends StatelessWidget {
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                   ),
-                  child: Image.asset(
-                    product.image,
-                    height: 140,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: product.id,
+                    child: Image.asset(
+                      product.image,
+                      height: 140,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
                   right: 8,
                   bottom: 8,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.read<CartProvider>().addItem(product);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${product.name} added to cart!'),
-                          backgroundColor: AppColors.primaryColor,
-                          duration: const Duration(seconds: 1),
-                        ),
-                      );
-                    },
-                    child: Card(
-                      color: AppColors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: Icon(
-                          Icons.shopping_bag_outlined,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: AddToCartIconButton(product: product),
                 ),
               ],
             ),

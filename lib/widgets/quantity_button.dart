@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
+import 'package:flutter/material.dart';
 
 class QuantitySelector extends StatelessWidget {
   final int quantity;
@@ -18,45 +18,75 @@ class QuantitySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.lightGrey.withOpacity(0.15),
+        color: AppColors.primaryColor.withOpacity(0.06),
         borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: AppColors.primaryColor.withOpacity(0.1)),
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          _roundIconButton(Icons.remove, onDecrease),
-          8.widthBox,
-          Text(
-            quantity.toString(),
-            style: AppTextTheme.bodyMedium(weight: FontWeight.w600),
+          _ActionButton(
+            icon: Icons.remove,
+            onTap: onDecrease,
+            isEnabled: quantity > 1,
           ),
-          8.widthBox,
-          _roundIconButton(Icons.add, onIncrease),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              quantity.toString().padLeft(2, '0'),
+              style: AppTextTheme.bodyLarge(weight: FontWeight.bold).copyWith(
+                color: AppColors.primaryColor,
+                letterSpacing: 1,
+              ),
+            ),
+          ),
+          _ActionButton(
+            icon: Icons.add,
+            onTap: onIncrease,
+            isEnabled: true,
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget _roundIconButton(IconData icon, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+  final bool isEnabled;
+
+  const _ActionButton({
+    required this.icon,
+    required this.onTap,
+    required this.isEnabled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: isEnabled ? onTap : null,
       child: Container(
-        height: 24,
-        width: 28,
+        height: 36,
+        width: 36,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: isEnabled ? Colors.white : Colors.white.withOpacity(0.5),
           shape: BoxShape.circle,
-          boxShadow: [
+          boxShadow: isEnabled ? [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 4,
+              color: AppColors.primaryColor.withOpacity(0.1),
+              blurRadius: 8,
               offset: const Offset(0, 2),
-            ),
-          ],
+            )
+          ] : null,
         ),
-        child: Icon(icon, size: 18, color: AppColors.primaryColor),
+        child: Icon(
+          icon,
+          size: 18,
+          color: isEnabled ? AppColors.primaryColor : AppColors.lightGrey,
+        ),
       ),
     );
   }
