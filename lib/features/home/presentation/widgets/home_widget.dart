@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
-import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/features/home/domain/models/banner_model.dart';
+import 'package:antiques_furniture/features/home/domain/entities/banner_entity.dart';
 import 'package:antiques_furniture/widgets/app_container.dart';
 
 class PromotionalBannerSlider extends StatefulWidget {
-  final List<BannerModel> banners;
+  final List<BannerEntity> banners;
 
   const PromotionalBannerSlider({super.key, required this.banners});
 
@@ -22,7 +21,7 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
 
   @override
   Widget build(BuildContext context) {
-    const double bannerHeight = 220; // Increased height
+    const double bannerHeight = 220;
 
     return SizedBox(
       height: bannerHeight,
@@ -43,14 +42,10 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
                   borderRadius: BorderRadius.circular(24),
                   child: Stack(
                     children: [
-                      // Full background image
                       Positioned.fill(
-                        child: Image.asset(
-                          banner.image,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.asset(banner.image, fit: BoxFit.cover),
                       ),
-                      // Overlay to ensure text readability
+
                       Positioned.fill(
                         child: Container(
                           decoration: BoxDecoration(
@@ -102,10 +97,18 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
                                 borderRadius: 10,
                                 color: AppColors.neumorphicBase,
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 14,
+                                    vertical: 6,
+                                  ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(color: AppColors.accentGold.withOpacity(0.5), width: 1),
+                                    border: Border.all(
+                                      color: AppColors.accentGold.withOpacity(
+                                        0.5,
+                                      ),
+                                      width: 1,
+                                    ),
                                   ),
                                   child: Text(
                                     "shop now",
@@ -126,7 +129,7 @@ class _PromotionalBannerSliderState extends State<PromotionalBannerSlider> {
               );
             },
           ),
-          // Indicators inside the container area
+
           Positioned(
             bottom: 24,
             child: Row(

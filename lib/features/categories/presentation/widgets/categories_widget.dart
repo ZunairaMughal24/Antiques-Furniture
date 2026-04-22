@@ -1,12 +1,13 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class IconButton extends StatelessWidget {
+class CategoryIconButton extends StatelessWidget {
   final String imagePath;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const IconButton({
+  const CategoryIconButton({
     required this.imagePath,
     required this.isSelected,
     required this.onTap,
@@ -15,6 +16,8 @@ class IconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSvg = imagePath.toLowerCase().endsWith('.svg');
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -27,17 +30,28 @@ class IconButton extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
               blurRadius: 5,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
-        child: Image.asset(
-          imagePath,
-          width: 30,
-          height: 30,
-          fit: BoxFit.contain,
-          color: isSelected ? AppColors.white : AppColors.lightGrey,
-        ),
+        child: isSvg
+            ? SvgPicture.asset(
+                imagePath,
+                width: 30,
+                height: 30,
+                fit: BoxFit.contain,
+                colorFilter: ColorFilter.mode(
+                  isSelected ? AppColors.white : AppColors.lightGrey,
+                  BlendMode.srcIn,
+                ),
+              )
+            : Image.asset(
+                imagePath,
+                width: 30,
+                height: 30,
+                fit: BoxFit.contain,
+                color: isSelected ? AppColors.white : AppColors.lightGrey,
+              ),
       ),
     );
   }

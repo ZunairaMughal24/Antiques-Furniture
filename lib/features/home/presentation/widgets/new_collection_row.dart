@@ -1,45 +1,58 @@
 import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
+import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
+import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
+import 'package:antiques_furniture/features/home/presentation/providers/home_provider.dart';
 import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/features/home/domain/models/new_collection_model.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class NewCollectionRow extends StatelessWidget {
   const NewCollectionRow({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(),
-      child: Row(
-        children: newCollectionItems.map((item) {
-          return Row(
-            children: [
-              _FurnitureImageContainer(
-                product: item,
-                onTap: () {
-                  context.push(
-                    AppRoutes.newColectionDetailScreenRoute,
-                    extra: item,
-                  );
-                },
-              ),
-              20.widthBox,
-            ],
-          );
-        }).toList(),
-      ).pOnly(left: 16, top: 4, bottom: 4),
+    return Consumer<HomeProvider>(
+      builder: (context, homeProvider, child) {
+        final products = homeProvider.products;
+
+        if (products.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: products.take(5).map((item) {
+              return Row(
+                children: [
+                  _FurnitureImageContainer(
+                    product: item,
+                    onTap: () {
+                      context.push(
+                        AppRoutes.newColectionDetailScreenRoute,
+                        extra: item,
+                      );
+                    },
+                  ),
+                  20.widthBox,
+                ],
+              );
+            }).toList(),
+          ).pOnly(left: 16, top: 4, bottom: 4),
+        );
+      },
     );
   }
 }
 
 class _FurnitureImageContainer extends StatelessWidget {
-  final NewCollectionModel product;
+  final ProductEntity product;
   final VoidCallback onTap;
 
   const _FurnitureImageContainer({required this.product, required this.onTap});
@@ -54,12 +67,11 @@ class _FurnitureImageContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Image with circular border from all sides
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: SizedBox(
-                width: 170, // Slightly reduced to fit padding
-                height: 150, // Reduced to prevent overflow
+                width: 170,
+                height: 150,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(18),
                   child: Stack(
@@ -91,12 +103,47 @@ class _FurnitureImageContainer extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Positioned(
+                        right: 8,
+                        bottom: 8,
+                        child: GestureDetector(
+                          onTap: () {
+                            context.read<CartProvider>().addItem(product);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('${product.name} added to cart!'),
+                                backgroundColor: AppColors.primaryColor,
+                                duration: const Duration(seconds: 1),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.shopping_bag_outlined,
+                              color: AppColors.primaryColor,
+                              size: 16,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            // Content section
+
             Container(
               width: 190,
               padding: const EdgeInsets.all(12),

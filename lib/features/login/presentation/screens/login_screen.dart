@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_images.dart';
@@ -7,12 +5,13 @@ import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/app_validators.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-
+import 'package:antiques_furniture/features/login/presentation/providers/auth_provider.dart';
 import 'package:antiques_furniture/widgets/primary_button.dart';
 import 'package:antiques_furniture/widgets/primary_textFeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -30,11 +29,22 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _passwordVisible = false;
   bool _rememberMe = false;
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
-      log('Email: ${_emailController.text}');
-      log('Password: ${_passwordController.text}');
-      log('Remember Me: $_rememberMe');
+      final success = await context.read<AuthProvider>().login(
+            _emailController.text,
+            _passwordController.text,
+          );
+
+      if (success) {
+        if (!mounted) return;
+        context.go(AppRoutes.homeScreenRoute);
+      } else {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.read<AuthProvider>().errorMessage)),
+        );
+      }
     }
   }
 
@@ -47,6 +57,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.watch<AuthProvider>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Stack(
@@ -231,11 +243,11 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             20.heightBox,
                             PrimaryButton(
-                              text: 'Login',
-                              onTap: () {
-                                _submit();
-                                context.push(AppRoutes.homeScreenRoute);
-                              },
+                              text: authProvider.state == AuthState.authenticating
+                                  ? 'Please wait...'
+                                  : 'Login',
+                              onTap: _submit,
+                              isDisabled: authProvider.state == AuthState.authenticating,
                             ),
                             6.heightBox,
                             Row(
@@ -272,6 +284,13 @@ class _SignInScreenState extends State<SignInScreen> {
               ],
             ),
           ),
+          if (authProvider.state == AuthState.authenticating) ...[
+            const ModalBarrier(
+              dismissible: false,
+              color: Colors.black26,
+            ),
+            const Center(child: CircularProgressIndicator()),
+          ],
         ],
       ),
     );

@@ -2,11 +2,11 @@ import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/features/cart/domain/models/cart_model.dart';
+import 'package:antiques_furniture/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:flutter/material.dart';
 
 class CartItemCard extends StatelessWidget {
-  final CartItemModel item;
+  final CartItemEntity item;
   final VoidCallback? onAdd;
   final VoidCallback? onRemove;
   final VoidCallback? onDelete;

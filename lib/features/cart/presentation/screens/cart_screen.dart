@@ -1,11 +1,22 @@
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
-import 'package:antiques_furniture/features/cart/domain/models/cart_model.dart';
+import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
 import 'package:antiques_furniture/features/cart/presentation/widgets/cart_item_card.dart';
 import 'package:antiques_furniture/features/cart/presentation/widgets/cart_summary_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,36 +28,58 @@ class CartScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Stack(
-        children: [
-          ListView.builder(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 12,
-              bottom: 250,
-            ),
-            itemCount: cartItems.length,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return CartItemCard(
-                item: cartItems[index],
-                onAdd: () {},
-                onRemove: () {},
-                onDelete: () {},
-              );
-            },
-          ),
+      body: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          if (cartProvider.state == CartState.loading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CartSummaryCard(
-              subtotal: 2249.00,
-              shipping: 20.0,
-              onCheckout: () {},
-            ),
-          ),
-        ],
+          if (cartProvider.items.isEmpty) {
+            return Center(
+              child: Text(
+                "Your cart is empty",
+                style: AppTextTheme.bodyLarge(color: Colors.grey),
+              ),
+            );
+          }
+
+          return Stack(
+            children: [
+              ListView.builder(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  top: 12,
+                  bottom: 250,
+                ),
+                itemCount: cartProvider.items.length,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final item = cartProvider.items[index];
+                  return CartItemCard(
+                    item: item,
+                    onAdd: () => cartProvider.addItem(item.product),
+                    onRemove: () => cartProvider.removeItem(item.product.id),
+                    onDelete: () => cartProvider.deleteItem(item.product.id),
+                  );
+                },
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CartSummaryCard(
+                  subtotal: cartProvider.subtotal,
+                  shipping: cartProvider.shipping,
+                  onCheckout: () {
+                    // Navigate to checkout or show snackbar
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Checkout functional implementation coming soon!")),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

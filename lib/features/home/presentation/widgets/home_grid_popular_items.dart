@@ -1,14 +1,16 @@
 import 'package:antiques_furniture/config/router.dart';
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
-import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
+import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
+import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
 import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class HomeGridNoScroll extends StatelessWidget {
-  final List<HomeItemModel> items;
+  final List<ProductEntity> items;
   const HomeGridNoScroll({required this.items, super.key});
 
   @override
@@ -18,11 +20,11 @@ class HomeGridNoScroll extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.65, // Taller card for content safety
+        childAspectRatio: 0.65,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
       ),
-      itemCount: 6,
+      itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
         return GestureDetector(
@@ -50,23 +52,35 @@ class HomeGridNoScroll extends StatelessWidget {
                         Positioned(
                           right: 8,
                           bottom: 8,
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
+                          child: GestureDetector(
+                            onTap: () {
+                              context.read<CartProvider>().addItem(item);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('${item.name} added to cart!'),
+                                  backgroundColor: AppColors.primaryColor,
+                                  duration: const Duration(seconds: 1),
                                 ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.shopping_bag_outlined,
-                              color: AppColors.primaryColor,
-                              size: 16,
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.05),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.shopping_bag_outlined,
+                                color: AppColors.primaryColor,
+                                size: 16,
+                              ),
                             ),
                           ),
                         ),

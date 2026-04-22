@@ -1,8 +1,10 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
+import 'package:antiques_furniture/features/home/presentation/providers/home_provider.dart';
 import 'package:antiques_furniture/widgets/app_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -25,7 +27,11 @@ class HomeHeader extends StatelessWidget {
                     borderWidth: 1,
                     child: Padding(
                       padding: EdgeInsets.all(10),
-                      child: Icon(Icons.more_horiz_rounded, size: 24, color: Colors.black87),
+                      child: Icon(
+                        Icons.more_horiz_rounded,
+                        size: 24,
+                        color: Colors.black87,
+                      ),
                     ),
                   ),
                 ),
@@ -45,7 +51,11 @@ class HomeHeader extends StatelessWidget {
                 borderWidth: 1,
                 child: Padding(
                   padding: EdgeInsets.all(10),
-                  child: Icon(Icons.notifications_none_rounded, size: 24, color: Colors.black87),
+                  child: Icon(
+                    Icons.notifications_none_rounded,
+                    size: 24,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
             ],
@@ -53,7 +63,7 @@ class HomeHeader extends StatelessWidget {
           28.heightBox,
 
           AppContainer(
-            borderRadius: 30, // More rounded like the image
+            borderRadius: 30,
             color: Colors.white.withOpacity(0.5),
             boxShadow: [
               BoxShadow(
@@ -63,12 +73,18 @@ class HomeHeader extends StatelessWidget {
               ),
             ],
             child: TextField(
+              onChanged: (value) {
+                context.read<HomeProvider>().searchProducts(value);
+              },
+              onSubmitted: (value) {
+                context.read<HomeProvider>().searchProducts(value);
+              },
               decoration: InputDecoration(
                 hintText: "Find unique furniture...",
                 hintStyle: const TextStyle(color: Colors.black38, fontSize: 16),
                 prefixIcon: const Padding(
                   padding: EdgeInsets.only(left: 12, right: 8),
-                  child: Icon(Icons.search, color: AppColors.accentGold, size: 24),
+                  child: Icon(Icons.search, color: Colors.amber, size: 24),
                 ),
                 border: InputBorder.none,
                 isDense: true,

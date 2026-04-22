@@ -2,16 +2,18 @@ import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/padding_extention.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
-import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
+import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
+import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
 import 'package:antiques_furniture/widgets/primary_appbar.dart';
 import 'package:antiques_furniture/widgets/primary_button1.dart';
 import 'package:antiques_furniture/widgets/quantity_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends HookWidget {
-  final HomeItemModel product;
+  final ProductEntity product;
 
   const ProductDetailScreen({super.key, required this.product});
 
@@ -23,7 +25,6 @@ class ProductDetailScreen extends HookWidget {
     return Scaffold(
       appBar: PrimaryAppBar(
         title: product.name,
-
         showSearchButton: false,
         showNotificationButton: false,
       ),
@@ -42,7 +43,6 @@ class ProductDetailScreen extends HookWidget {
 
             Container(
               height: screenHeight * 0.80,
-
               margin: EdgeInsets.only(top: screenHeight * 0.38),
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -138,7 +138,7 @@ class ProductDetailScreen extends HookWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.shopping_bag_outlined,
                           color: AppColors.white,
                         ),
@@ -152,7 +152,19 @@ class ProductDetailScreen extends HookWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      context.read<CartProvider>().addItem(
+                            product,
+                            quantity: quantity.value,
+                          );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('${product.name} added to cart!'),
+                          backgroundColor: AppColors.primaryColor,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ).p16(),

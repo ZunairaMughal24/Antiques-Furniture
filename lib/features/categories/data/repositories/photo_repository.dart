@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:antiques_furniture/features/categories/domain/entities/photo_entity.dart';
-import 'package:antiques_furniture/features/categories/domain/models/photo_model.dart';
+import 'package:antiques_furniture/features/categories/data/models/photo_model.dart';
 import 'package:antiques_furniture/features/categories/domain/repositories/photo_repository.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,10 +1,12 @@
 import 'package:antiques_furniture/core/utils/app_colors.dart';
-import 'package:antiques_furniture/features/categories/domain/models/categories_model.dart';
+import 'package:antiques_furniture/features/cart/presentation/providers/cart_provider.dart';
+import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
-  final ProductModel product;
+  final ProductEntity product;
   final VoidCallback? onTap;
 
   const ProductCard({super.key, required this.product, this.onTap});
@@ -37,16 +39,28 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   right: 8,
                   bottom: 8,
-                  child: Card(
-                    color: AppColors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: Icon(
-                        Icons.shopping_bag_outlined,
-                        color: Color.fromARGB(255, 236, 203, 173),
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<CartProvider>().addItem(product);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('${product.name} added to cart!'),
+                          backgroundColor: AppColors.primaryColor,
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: AppColors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: Icon(
+                          Icons.shopping_bag_outlined,
+                          color: AppColors.primaryColor,
+                        ),
                       ),
                     ),
                   ),
@@ -54,7 +68,6 @@ class ProductCard extends StatelessWidget {
               ],
             ),
 
-            // Product name
             Padding(
               padding: const EdgeInsets.only(left: 8, top: 8),
               child: Text(
@@ -68,11 +81,10 @@ class ProductCard extends StatelessWidget {
               ),
             ),
 
-            // Product type
             Padding(
               padding: const EdgeInsets.only(left: 8, top: 2),
               child: Text(
-                product.type,
+                product.category,
                 style: const TextStyle(
                   fontSize: 13,
                   color: AppColors.lightGrey,
@@ -82,13 +94,12 @@ class ProductCard extends StatelessWidget {
               ),
             ),
 
-            // Price + rating row
             Padding(
               padding: const EdgeInsets.only(left: 8, top: 8),
               child: Row(
                 children: [
                   Text(
-                    '\$${product.price.toStringAsFixed(1)}',
+                    '\$${product.price}',
                     style: const TextStyle(
                       fontSize: 16,
                       color: AppColors.primaryColor,

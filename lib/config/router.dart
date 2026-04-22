@@ -1,13 +1,10 @@
-
 import 'package:antiques_furniture/features/categories/presentation/screens/categories_screen.dart';
-import 'package:antiques_furniture/features/home/domain/models/home_model.dart';
-import 'package:antiques_furniture/features/home/domain/models/new_collection_model.dart';
+import 'package:antiques_furniture/features/home/domain/entities/product_entity.dart';
 import 'package:antiques_furniture/features/home/presentation/screens/new_collection_detail_screen.dart';
 import 'package:antiques_furniture/features/home/presentation/screens/popular_items_detail_screen.dart';
 import 'package:antiques_furniture/features/login/presentation/screens/login_screen.dart';
 import 'package:antiques_furniture/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:antiques_furniture/features/sign_up/presentation/screens/sign_up_screen.dart';
-
 import 'package:antiques_furniture/home.dart';
 import 'package:antiques_furniture/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -100,30 +97,22 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.popularItemsDetailScreenRoute,
       builder: (context, state) {
-        final product = state.extra as HomeItemModel;
+        final product = state.extra as ProductEntity;
         return ProductDetailScreen(product: product);
       },
     ),
     GoRoute(
       path: AppRoutes.newColectionDetailScreenRoute,
       builder: (context, state) {
-        final product = state.extra as NewCollectionModel;
+        final product = state.extra as ProductEntity;
         return NewCollectionDetailScreen(product: product);
       },
     ),
     GoRoute(
       path: AppRoutes.categoriesScreenRoute,
       builder: (context, state) {
-        final product = state.extra as HomeItemModel;
         return CategoryScreen();
       },
     ),
-    //   GoRoute(
-    //   path: AppRoutes.cartScreenRoute,
-    //   builder: (context, state) {
-    //     final product = state.extra as HomeItemModel;
-    //     return CartScreen();
-    //   },
-    // ),
   ],
 );
