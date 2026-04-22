@@ -111,19 +111,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         physics: const BouncingScrollPhysics(),
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.65,
+                          childAspectRatio: 0.68,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
                         ),
                         itemCount: products.length,
                         itemBuilder: (context, index) {
                           final item = products[index];
+                          final heroTag = 'category_${item.id}';
                           return ProductCard(
                             product: item,
+                            heroTag: heroTag,
                             onTap: () {
                               context.push(
                                 AppRoutes.productDetailRoute,
-                                extra: item,
+                                extra: {
+                                  'product': item,
+                                  'heroTag': heroTag,
+                                },
                               );
                             },
                           );

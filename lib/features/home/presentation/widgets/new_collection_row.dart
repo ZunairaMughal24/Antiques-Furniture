@@ -30,14 +30,19 @@ class NewCollectionRow extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Row(
             children: products.take(5).map((item) {
+              final heroTag = 'new_collection_${item.id}';
               return Row(
                 children: [
                   _FurnitureImageContainer(
                     product: item,
+                    heroTag: heroTag,
                     onTap: () {
                       context.push(
                         AppRoutes.productDetailRoute,
-                        extra: item,
+                        extra: {
+                          'product': item,
+                          'heroTag': heroTag,
+                        },
                       );
                     },
                   ),
@@ -54,9 +59,14 @@ class NewCollectionRow extends StatelessWidget {
 
 class _FurnitureImageContainer extends StatelessWidget {
   final ProductEntity product;
+  final String heroTag;
   final VoidCallback onTap;
 
-  const _FurnitureImageContainer({required this.product, required this.onTap});
+  const _FurnitureImageContainer({
+    required this.product,
+    required this.heroTag,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +88,7 @@ class _FurnitureImageContainer extends StatelessWidget {
                   child: Stack(
                     children: [
                       Hero(
-                        tag: product.id,
+                        tag: heroTag,
                         child: Image.asset(
                           product.image,
                           width: double.infinity,

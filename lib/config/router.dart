@@ -5,6 +5,7 @@ import 'package:antiques_furniture/features/login/presentation/screens/login_scr
 import 'package:antiques_furniture/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:antiques_furniture/features/sign_up/presentation/screens/sign_up_screen.dart';
 import 'package:antiques_furniture/home.dart';
+import 'package:antiques_furniture/features/favorites/presentation/screens/wishlist_screen.dart';
 import 'package:antiques_furniture/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -46,6 +47,7 @@ abstract class AppRoutes {
   static const String detail = '/detail';
   static const String terms = '/terms';
   static const String privacy = '/privacy';
+  static const String wishlistRoute = '/wishlist';
 }
 
 final router = GoRouter(
@@ -95,6 +97,13 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.productDetailRoute,
       builder: (context, state) {
+        if (state.extra is Map<String, dynamic>) {
+          final data = state.extra as Map<String, dynamic>;
+          return ProductDetailScreen(
+            product: data['product'] as ProductEntity,
+            heroTag: data['heroTag'] as String?,
+          );
+        }
         final product = state.extra as ProductEntity;
         return ProductDetailScreen(product: product);
       },
@@ -103,6 +112,12 @@ final router = GoRouter(
       path: AppRoutes.categoriesScreenRoute,
       builder: (context, state) {
         return CategoryScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.wishlistRoute,
+      builder: (context, state) {
+        return const WishlistScreen();
       },
     ),
   ],

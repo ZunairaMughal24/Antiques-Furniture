@@ -1,4 +1,3 @@
-import 'package:antiques_furniture/core/utils/app_colors.dart';
 import 'package:antiques_furniture/core/utils/app_text_theme.dart';
 import 'package:antiques_furniture/core/utils/widget_utility_extention.dart';
 import 'package:antiques_furniture/features/home/presentation/providers/home_provider.dart';

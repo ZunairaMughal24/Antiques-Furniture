@@ -36,6 +36,7 @@ import 'package:antiques_furniture/features/favorites/data/repositories/favorite
 import 'package:antiques_furniture/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:antiques_furniture/features/favorites/domain/usecases/toggle_favorite_usecase.dart';
 import 'package:antiques_furniture/features/favorites/domain/usecases/is_favorite_usecase.dart';
+import 'package:antiques_furniture/features/favorites/domain/usecases/get_favorites_usecase.dart';
 import 'package:antiques_furniture/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:get_it/get_it.dart';
 
@@ -157,11 +158,13 @@ Future<void> init() async {
   sl.registerFactory<FavoritesProvider>(() => FavoritesProvider(
         toggleFavoriteUseCase: sl(),
         isFavoriteUseCase: sl(),
+        getFavoritesUseCase: sl(),
       ));
 
   // Use cases
   sl.registerLazySingleton<ToggleFavoriteUseCase>(() => ToggleFavoriteUseCase(sl()));
   sl.registerLazySingleton<IsFavoriteUseCase>(() => IsFavoriteUseCase(sl()));
+  sl.registerLazySingleton<GetFavoritesUseCase>(() => GetFavoritesUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<FavoritesRepository>(

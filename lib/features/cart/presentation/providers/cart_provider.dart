@@ -34,6 +34,10 @@ class CartProvider extends ChangeNotifier {
 
   List<CartItemEntity> get items => _cart.items;
 
+  bool isInCart(String productId) {
+    return _cart.items.any((item) => item.product.id == productId);
+  }
+
   CartTotals get totals => calculateCartTotalsUseCase(_cart.items);
 
   double get subtotal => totals.subtotal;

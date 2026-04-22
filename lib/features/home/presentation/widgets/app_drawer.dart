@@ -107,7 +107,10 @@ class AppDrawer extends StatelessWidget {
                       _DrawerTile(
                         icon: Icons.favorite_border_rounded,
                         title: "Wishlist",
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                          context.push(AppRoutes.wishlistRoute);
+                        },
                       ),
                       _DrawerTile(
                         icon: Icons.location_on_outlined,

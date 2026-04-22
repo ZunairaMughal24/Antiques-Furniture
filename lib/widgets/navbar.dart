@@ -27,12 +27,18 @@ class BottomNavBar extends StatelessWidget {
             _buildNavItem(Icons.home_outlined, Icons.home, 0, 'Home'),
             _buildNavItem(Icons.grid_view, Icons.grid_view_sharp, 1, 'Store'),
             _buildNavItem(
+              Icons.favorite_outline,
+              Icons.favorite,
+              2,
+              'Wishlist',
+            ),
+            _buildNavItem(
               Icons.shopping_cart_outlined,
               Icons.shopping_cart,
-              2,
+              3,
               'Cart',
             ),
-            _buildNavItem(Icons.person_outline, Icons.person, 3, 'Profile'),
+            _buildNavItem(Icons.person_outline, Icons.person, 4, 'Profile'),
           ],
         ),
       ),
@@ -48,7 +54,7 @@ class BottomNavBar extends StatelessWidget {
     final isSelected = currentIndex == index;
     return GestureDetector(
       onTap: () => onItemTapped(index),
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.translucent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

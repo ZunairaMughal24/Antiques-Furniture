@@ -103,9 +103,12 @@ class ProductDetailRatingAndMeta extends StatelessWidget {
           style: AppTextTheme.bodyMedium(weight: FontWeight.bold),
         ),
         6.widthBox,
-        Text(
-          "(120 Verified Reviews)",
-          style: AppTextTheme.bodySmall(color: Colors.black45),
+        Expanded(
+          child: Text(
+            "(120 Verified Reviews)",
+            style: AppTextTheme.bodySmall(color: Colors.black45),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );
@@ -126,21 +129,24 @@ class ProductDetailQuantitySelector extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Total Quantity",
-                style: AppTextTheme.bodySmall(color: Colors.black45),
-              ),
-              4.heightBox,
-              Text(
-                "Adjust for your home",
-                style: AppTextTheme.bodyMedium(weight: FontWeight.bold),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Total Quantity",
+                  style: AppTextTheme.bodySmall(color: Colors.black45),
+                ),
+                4.heightBox,
+                Text(
+                  "Adjust for your home",
+                  style: AppTextTheme.bodyMedium(weight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
-          const Spacer(),
+          12.widthBox,
           QuantitySelector(
             quantity: quantity.value,
             onIncrease: () => quantity.value++,
@@ -168,51 +174,45 @@ class ProductDetailBottomAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        padding: EdgeInsets.fromLTRB(
-          28,
-          20,
-          28,
-          MediaQuery.of(context).padding.bottom + 20,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 15,
-              offset: const Offset(0, -5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Final Price",
-                  style: AppTextTheme.bodySmall(color: Colors.black38),
-                ),
-                Text(
-                  "\$${product.price * quantity.value}",
-                  style: AppTextTheme.h4(weight: FontWeight.bold),
-                ),
-              ],
-            ),
-            24.widthBox,
-            Expanded(
-              child: AddToCartButton(
-                product: product,
-                quantity: quantity.value,
-                text: 'Order Now',
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
+    return Container(
+      padding: EdgeInsets.fromLTRB(28, 20, 28, 20 + bottomPadding),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 15,
+            offset: const Offset(0, -5),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Final Price",
+                style: AppTextTheme.bodySmall(color: Colors.black38),
               ),
+              Text(
+                "\$${product.price * quantity.value}",
+                style: AppTextTheme.h4(weight: FontWeight.bold),
+              ),
+            ],
+          ),
+          24.widthBox,
+          Expanded(
+            child: AddToCartButton(
+              product: product,
+              quantity: quantity.value,
+              text: 'Order Now',
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

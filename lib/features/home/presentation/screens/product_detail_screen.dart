@@ -10,8 +10,9 @@ import 'package:go_router/go_router.dart';
 
 class ProductDetailScreen extends HookWidget {
   final ProductEntity product;
+  final String? heroTag;
 
-  const ProductDetailScreen({super.key, required this.product});
+  const ProductDetailScreen({super.key, required this.product, this.heroTag});
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +46,11 @@ class ProductDetailScreen extends HookWidget {
                     StretchMode.blurBackground,
                   ],
                   background: Hero(
-                    tag: product.id,
+                    tag: heroTag ?? product.id,
                     child: Image.asset(product.image, fit: BoxFit.cover),
                   ),
                 ),
               ),
-
               SliverToBoxAdapter(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -107,19 +107,15 @@ class ProductDetailScreen extends HookWidget {
                           ],
                         ),
                         24.heightBox,
-
                         ProductDetailTitleAndPrice(product: product),
                         16.heightBox,
-
                         ProductDetailRatingAndMeta(product: product),
                         28.heightBox,
-
                         Divider(
                           color: Colors.black.withOpacity(0.05),
                           thickness: 1,
                         ),
                         28.heightBox,
-
                         Text(
                           "The Design Philosophy",
                           style: AppTextTheme.bodyLarge(
@@ -134,7 +130,6 @@ class ProductDetailScreen extends HookWidget {
                           ).copyWith(height: 1.7, letterSpacing: 0.1),
                         ),
                         32.heightBox,
-
                         ProductDetailQuantitySelector(quantity: quantity),
                         120.heightBox,
                       ],
@@ -144,10 +139,16 @@ class ProductDetailScreen extends HookWidget {
               ),
             ],
           ),
-
           _buildFloatingNav(context),
-
-          ProductDetailBottomAction(product: product, quantity: quantity),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ProductDetailBottomAction(
+              product: product,
+              quantity: quantity,
+            ),
+          ),
         ],
       ),
     );

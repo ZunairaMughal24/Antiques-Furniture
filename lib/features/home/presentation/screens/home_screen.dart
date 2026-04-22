@@ -106,9 +106,16 @@ class _CollectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final heroTag = 'collection_${product.id}';
     return GestureDetector(
       onTap: () {
-        context.push(AppRoutes.productDetailRoute, extra: product);
+        context.push(
+          AppRoutes.productDetailRoute,
+          extra: {
+            'product': product,
+            'heroTag': heroTag,
+          },
+        );
       },
       child: AppContainer(
         borderRadius: 24,
@@ -127,7 +134,7 @@ class _CollectionCard extends StatelessWidget {
                   child: Stack(
                     children: [
                       Hero(
-                        tag: product.id,
+                        tag: heroTag,
                         child: Image.asset(
                           product.image,
                           width: double.infinity,

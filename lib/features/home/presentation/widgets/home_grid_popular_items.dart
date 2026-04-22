@@ -26,8 +26,15 @@ class HomeGridNoScroll extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
+        final heroTag = 'popular_${item.id}';
         return GestureDetector(
-          onTap: () => context.push(AppRoutes.productDetailRoute, extra: item),
+          onTap: () => context.push(
+            AppRoutes.productDetailRoute,
+            extra: {
+              'product': item,
+              'heroTag': heroTag,
+            },
+          ),
           child: AppContainer(
             borderRadius: 15,
             child: Column(
@@ -40,7 +47,7 @@ class HomeGridNoScroll extends StatelessWidget {
                     child: Stack(
                       children: [
                         Hero(
-                          tag: item.id,
+                          tag: heroTag,
                           child: Image.asset(
                             item.image,
                             height: 120,

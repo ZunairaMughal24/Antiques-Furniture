@@ -6,9 +6,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEntity product;
+  final String? heroTag;
   final VoidCallback? onTap;
 
-  const ProductCard({super.key, required this.product, this.onTap});
+  const ProductCard({
+    super.key,
+    required this.product,
+    this.heroTag,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +35,10 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(15),
                   ),
                   child: Hero(
-                    tag: product.id,
+                    tag: heroTag ?? product.id,
                     child: Image.asset(
                       product.image,
-                      height: 140,
+                      height: 120,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),

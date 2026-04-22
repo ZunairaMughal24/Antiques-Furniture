@@ -23,37 +23,83 @@ class AddToCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PrimaryButton(
-      onTap: () {
-        context.read<CartProvider>().addItem(
-              product,
-              quantity: quantity,
-            );
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                const Icon(Icons.check_circle_outline, color: Colors.white, size: 20),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    '${product.name} added to cart!',
-                    style: AppTextTheme.bodyMedium(color: Colors.white),
+      onTap: () async {
+        final cartProvider = context.read<CartProvider>();
+        bool shouldAdd = true;
+
+        if (cartProvider.isInCart(product.id)) {
+          shouldAdd = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
+                  title: Text(
+                    "Already in Cart",
+                    style: AppTextTheme.h4(weight: FontWeight.bold),
+                  ),
+                  content: Text(
+                    "${product.name} is already in your cart. Would you like to add more?",
+                    style: AppTextTheme.bodyMedium(color: Colors.black54),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: Text(
+                        "Cancel",
+                        style: AppTextTheme.bodyMedium(color: Colors.grey),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: Text(
+                        "Add More",
+                        style: AppTextTheme.bodyMedium(
+                          color: AppColors.primaryColor,
+                          weight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            backgroundColor: AppColors.primaryColor,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            margin: const EdgeInsets.all(20),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-        
-        onAfterAdd?.call();
+              ) ??
+              false;
+        }
+
+        if (shouldAdd) {
+          cartProvider.addItem(
+            product,
+            quantity: quantity,
+          );
+
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Row(
+                  children: [
+                    const Icon(Icons.check_circle_outline,
+                        color: Colors.white, size: 20),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        '${product.name} added to cart!',
+                        style: AppTextTheme.bodyMedium(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                backgroundColor: AppColors.primaryColor,
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                margin: const EdgeInsets.all(20),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          }
+          onAfterAdd?.call();
+        }
       },
       child: Center(
         child: Row(
@@ -92,16 +138,62 @@ class AddToCartIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.read<CartProvider>().addItem(product);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${product.name} added to cart!'),
-            backgroundColor: AppColors.primaryColor,
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 1),
-          ),
-        );
+      onTap: () async {
+        final cartProvider = context.read<CartProvider>();
+        bool shouldAdd = true;
+
+        if (cartProvider.isInCart(product.id)) {
+          shouldAdd = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  title: Text(
+                    "Already in Cart",
+                    style: AppTextTheme.h4(weight: FontWeight.bold),
+                  ),
+                  content: Text(
+                    "${product.name} is already in your cart. Would you like to add more?",
+                    style: AppTextTheme.bodyMedium(color: Colors.black54),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: Text(
+                        "Cancel",
+                        style: AppTextTheme.bodyMedium(color: Colors.grey),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: Text(
+                        "Add More",
+                        style: AppTextTheme.bodyMedium(
+                          color: AppColors.primaryColor,
+                          weight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ) ??
+              false;
+        }
+
+        if (shouldAdd) {
+          cartProvider.addItem(product);
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${product.name} added to cart!'),
+                backgroundColor: AppColors.primaryColor,
+                behavior: SnackBarBehavior.floating,
+                duration: const Duration(seconds: 1),
+              ),
+            );
+          }
+        }
       },
       child: Container(
         padding: const EdgeInsets.all(6),
